@@ -1,0 +1,42 @@
+
+
+
+
+
+.reveal .slide-menu-button .fa-bars::before {
+background-image: url('home-click.svg') !important;
+@include background-full;
+}
+
+
+
+.theme-title1 {
+  &:is(.slide-background) {
+    background-image: url(inn-bg1.png);
+    @include background-full;
+  }
+  }
+  
+  
+  .theme-title2 {
+  &:is(.slide-background) {
+    background-image: url(inn-bg2.png);
+    @include background-full;
+  }
+  }
+  
+      .theme-title3 {
+  &:is(.slide-background) {
+     background-image: url(inn-bg3-half.png);
+    @include background-full;
+  }
+  
+    .theme-logo {
+  &:is(.slide-background) {
+    background-image: url(inn-bg-final.png);
+    @include background-full;
+  }
+  }
+  
+
+  }

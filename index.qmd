@@ -1,0 +1,32 @@
+# Preface
+
+These pages includes notes and resources for the *Statistical Rethinking Seminars* at the Faculty of Social and Health Sciences at the University of Inland Norway. 
+
+
+## What and How we learn
+This series of seminars is based on the book [*Statistical Rethinking*](https://www.routledge.com/Statistical-Rethinking-A-Bayesian-Course-with-Examples-in-R-and-STAN/McElreath/p/book/9780367139919) by Richard McElreath. The book introduces Bayesian statistics and probabilistic programming in the context of scientific research. The book helps you to develop a principled approach to statistical analysis. 
+
+We will meet every week for discussions. Meetings will organized as [seminars](https://en.wikipedia.org/wiki/Seminar) where we aim to discuss the material and exercises from the book. This learning strategy requires that you are prepared to actively participate in the discussions. Preparation includes reading the relevant chapters, watching the lectures and working on the exercises.
+
+The seminar series follows the same structure as the [course given by Richard McElreath](https://github.com/rmcelreath/stat_rethinking_2025). Starting on the 10th of January 2025, we will meet every week for 10 weeks.
+
+
+## Prerequisites
+
+There are no formal prerequisites for the seminar series. However, knowing basic R programminmg will make your life easier. 
+
+Experience with "traditional" statistical analysis will also be helpful.
+
+
+## Resources
+
+* [Statistical rethinking with brms, ggplot2, and the tidyverse: Second edition](https://bookdown.org/content/4857/) by Solomon Kurz is a thorough paralell reading of *Statistical Rethinking* with all models implemented in the [`brms`](https://github.com/paul-buerkner/brms) package.
+
+
+
+
+
+
+
+
+

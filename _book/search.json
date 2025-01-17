@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistical Rethinking Seminars",
+    "section": "",
+    "text": "1 Preface\nThese pages includes notes and resources for the Statistical Rethinking Seminars at the Faculty of Social and Health Sciences at the University of Inland Norway.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#what-and-how-we-learn",
+    "href": "index.html#what-and-how-we-learn",
+    "title": "Statistical Rethinking Seminars",
+    "section": "1.1 What and How we learn",
+    "text": "1.1 What and How we learn\nThis series of seminars is based on the book Statistical Rethinking by Richard McElreath. The book introduces Bayesian statistics and probabilistic programming in the context of scientific research. The book helps you to develop a principled approach to statistical analysis.\nWe will meet every week for discussions. Meetings will organized as seminars where we aim to discuss the material and exercises from the book. This learning strategy requires that you are prepared to actively participate in the discussions. Preparation includes reading the relevant chapters, watching the lectures and working on the exercises.\nThe seminar series follows the same structure as the course given by Richard McElreath. Starting on the 10th of January 2025, we will meet every week for 10 weeks.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "Statistical Rethinking Seminars",
+    "section": "1.2 Prerequisites",
+    "text": "1.2 Prerequisites\nThere are no formal prerequisites for the seminar series. However, knowing basic R programminmg will make your life easier.\nExperience with “traditional” statistical analysis will also be helpful.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#resources",
+    "href": "index.html#resources",
+    "title": "Statistical Rethinking Seminars",
+    "section": "1.3 Resources",
+    "text": "1.3 Resources\n\nStatistical rethinking with brms, ggplot2, and the tidyverse: Second edition by Solomon Kurz is a thorough paralell reading of Statistical Rethinking with all models implemented in the brms package.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
+    ]
+  },
+  {
+    "objectID": "01-notation.html",
+    "href": "01-notation.html",
+    "title": "2  Writing mathematical notation in quarto files",
+    "section": "",
+    "text": "2.1 Why use mathematical notation?\nA quarto document can contain output from code chunks based on data, code and other technical content, including mathematical notation. \\(LaTeX\\) syntax is a well described system for writing mathematical notation in quarto files.\nSimilar to other written languages, mathematical notation helps you develop and communicate ideas.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+    ]
+  },
+  {
+    "objectID": "01-notation.html#using-latex-syntax",
+    "href": "01-notation.html#using-latex-syntax",
+    "title": "2  Writing mathematical notation in quarto files",
+    "section": "2.2 Using \\(LaTeX\\) syntax",
+    "text": "2.2 Using \\(LaTeX\\) syntax\nTo add",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+    ]
+  },
+  {
+    "objectID": "01-notation.html#using-syntax",
+    "href": "01-notation.html#using-syntax",
+    "title": "2  Writing mathematical notation in quarto files",
+    "section": "2.2 Using syntax",
+    "text": "2.2 Using syntax",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+    ]
+  }
+]

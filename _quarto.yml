@@ -1,0 +1,22 @@
+project:
+  type: book
+
+book:
+  title: "Statistical Rethinking Seminars"
+  author: "Daniel Hammarström"
+  date: "2024-12-14"
+  chapters:
+    - index.qmd
+    - 01-notation.qmd
+    - 04-ch4-stanmodels.qmd
+    
+brand: _brand.yml
+bibliography: resources/references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+  epub:
+    cover-image: cover.png

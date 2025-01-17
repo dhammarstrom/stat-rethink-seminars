@@ -1,0 +1,223 @@
+---
+title: "Chapter 4"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Packages
+
+```{r}
+library(cmdstanr)
+library(rethinking)
+```
+
+
+
+## Model 4.1
+
+The data used in `m4.1`comes from `rethinking::Howell`:
+
+```{r}
+
+data("Howell1") 
+
+d <- Howell1[ Howell1$age >= 18 , ]
+
+```
+
+The model is defined as follows:
+
+```{stan, output.var="m4.1", code=readLines('models/m4-1.stan')}
+
+```
+
+To compile the model we need to tell `cmdstanr` where it is located. I've collected all models in a subfolder in my project called `models` and replaced `.` with `-` in all Stan-files.
+
+```{r}
+#| eval: false
+
+# Compiling the model
+m4.1 <- cmdstan_model("models/m4-1.stan")
+
+```
+
+Next, we need to prepare the data. Unlike `quap` from the rethinking package, Stan accepts only a list of variables. I'll use `dl` (for data list) as a standard here.
+
+```{r}
+dl <- list(N = length(d$height), 
+           h = d$height)
+```
+
+To run the model we need to call `cmdstanr` again, this time with a command telling it to sample from the posterior. 
+
+```{r}
+fit4.1 <- m4.1$sample(
+        data = dl,                 # The list of variables
+        iter_sampling = 3000,      # Number of iterations for sampling
+        iter_warmup = 1000,        # Number of warmup iterations
+        chains = 2                 # Number of Markov chains
+)
+```
+
+Model `m4.1` results in a lot of divergent transitions, something that will be discussed later in the book. A probable cause for the problem is the wide uniformative prior on sigma. We could replace this prior with a more informative one. To compare the two alternatives, let's do a simple prior predictive simulation. 
+
+
+```{r}
+#| code-fold: true
+
+N <- 1000
+mu <- rnorm(N, 178, 20)
+sigma1 <- runif(N, 0, 50)
+sigma2 <- abs(rnorm(N, 0,10))
+
+h1 <- rnorm(N, mu, sigma1)
+h2 <- rnorm(N, mu, sigma2)
+
+par(mfrow = c(1,2))
+plot(density(h1), 
+     main = "mu ~ normal(178, 20)\nsigma ~ uniform(0,50)", 
+     xlab = "Prior predictive simulated Height (cm)", 
+     ylab = "",
+     yaxt = "n", 
+     frame = FALSE)
+plot(density(h2), 
+     main = "mu ~ normal(178, 20)\nsigma ~ Half-Normal(0,10)", 
+     xlab = "Prior predictive simulated Height (cm)",
+     ylab = "",
+     yaxt = "n", 
+     frame = FALSE)
+par(mfrow = c(1,1))
+
+
+```
+
+The prior predictive simulation does shrink a little, but not much. Let's see if sampling improves. The new model `m4.1b` has an updated prior for $\sigma$, otherwise, it remains the same.
+
+```{stan, output.var="m4.1b", code=readLines('models/m4-1b.stan')}
+
+```
+
+```{r}
+#| eval: false
+
+# Compiling the model
+m4.1b <- cmdstan_model("models/m4-1b.stan")
+
+```
+
+Next, we sample from the model. 
+
+```{r}
+fit4.1b <- m4.1b$sample(
+        data = dl,                 # The list of variables
+        iter_sampling = 3000,      # Number of iterations for sampling
+        iter_warmup = 1000,        # Number of warmup iterations
+        chains = 2                 # Number of Markov chains
+)
+```
+
+No divergent transitions! Let's summarise the model. We can use precis from `rethinking` to get a compact summary.
+
+```{r}
+precis(fit4.1b)
+```
+
+A few things to note. The mean of $\mu$ and $\sigma$ are fairly close to the model results in the book using `quap`. The choice of a slighltly more confined prior on sigma did not change the model estimates but it did make inferense from the model using MCMC sampling possible. This will be covered in more details later.
+
+How do we know that the model with a bad prior gives us bad inferences?
+
+```{r}
+precis(fit4.1)
+```
+
+It looks like the $\mu$ is very much outside what we would expect from the data. The effective sample size (`ess_bulk`) is super low and the indication of chain convergence is way higher than 1.
+
+## Model 4.2
+
+Similarly to `m4.1`, `m4.2` has a very weak prior on $\sigma$ something that might make proper sampling impossible. The lesson in `m4.2` is that a narrow very prior affects the posterior distribution.
+
+
+```{stan, output.var="m4.2b", code=readLines('models/m4-2b.stan')}
+
+```
+
+```{r}
+#| eval: false
+
+# Compiling the model
+m4.2b <- cmdstan_model("models/m4-2b.stan")
+
+```
+
+
+
+```{r}
+fit4.2b <- m4.2b$sample(
+        data = dl,                 # The list of variables
+        iter_sampling = 2000,      # Number of iterations for sampling
+        iter_warmup = 1000,        # Number of warmup iterations
+        chains = 2                 # Number of Markov chains
+)
+```
+
+```{r}
+precis(fit4.2b)
+```
+
+Similarly to the book we get a posterior with the average of $\mu$ heavily influenced by the narrow prior.
+
+
+## Model 4.3
+
+Model `m4.3` introduces a deterministic component for $\mu$ in the likelihood. We can structure the Stan code in a similar fashion as the description on p.97. Notice again that the prior for $\sigma$ is slightly less extreme than the one proposed in the book.
+
+```{stan, output.var="m4.3b", code=readLines('models/m4-3b.stan')}
+
+```
+
+```{r}
+#| eval: false
+
+# Compiling the model
+m4.3b <- cmdstan_model("models/m4-3b.stan")
+
+```
+
+The data needs to be compiled with two additional variables, `w` and `xbar`. 
+
+```{r}
+dl <- list(N = length(d$height), 
+           h = d$height, 
+           w = d$weight, 
+           xbar = mean(d$weight))
+```
+
+Next, we sample from the model. 
+
+```{r}
+fit4.3b <- m4.3b$sample(
+        data = dl,                 # The list of variables
+        iter_sampling = 3000,      # Number of iterations for sampling
+        iter_warmup = 1000,        # Number of warmup iterations
+        chains = 2                 # Number of Markov chains
+)
+```
+
+
+```{r}
+precis(fit4.3b)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
