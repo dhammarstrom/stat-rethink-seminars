@@ -7,16 +7,20 @@ book:
   date: "2024-12-14"
   chapters:
     - index.qmd
+    - 00-resources.qmd
     - 01-notation.qmd
-    - 04-ch4-stanmodels.qmd
+    - 05-ch4-stanmodels.qmd
     
 brand: _brand.yml
 bibliography: resources/references.bib
+css: style.css
 
 format:
-  html:
-    theme: cosmo
-  pdf:
-    documentclass: scrreprt
-  epub:
-    cover-image: cover.png
+  html: 
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+highlight-style: atom-one

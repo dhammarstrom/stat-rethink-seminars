@@ -42,31 +42,71 @@
   {
     "objectID": "01-notation.html",
     "href": "01-notation.html",
-    "title": "2  Writing mathematical notation in quarto files",
+    "title": "3  Writing mathematical notation in quarto files",
     "section": "",
-    "text": "2.1 Why use mathematical notation?\nA quarto document can contain output from code chunks based on data, code and other technical content, including mathematical notation. \\(LaTeX\\) syntax is a well described system for writing mathematical notation in quarto files.\nSimilar to other written languages, mathematical notation helps you develop and communicate ideas.",
+    "text": "3.1 Why use mathematical notation?\nA quarto document can contain output from code chunks based on data, code and other technical content, including mathematical notation. \\(\\LaTeX\\) syntax is a well described system for writing mathematical notation, for example, in quarto files.\nSimilar to other written languages, mathematical notation helps you develop and communicate ideas.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
     ]
   },
   {
     "objectID": "01-notation.html#using-latex-syntax",
     "href": "01-notation.html#using-latex-syntax",
-    "title": "2  Writing mathematical notation in quarto files",
-    "section": "2.2 Using \\(LaTeX\\) syntax",
-    "text": "2.2 Using \\(LaTeX\\) syntax\nTo add",
+    "title": "3  Writing mathematical notation in quarto files",
+    "section": "3.2 Using \\(\\LaTeX\\) syntax",
+    "text": "3.2 Using \\(\\LaTeX\\) syntax\nTo add",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
     ]
   },
   {
-    "objectID": "01-notation.html#using-syntax",
-    "href": "01-notation.html#using-syntax",
-    "title": "2  Writing mathematical notation in quarto files",
-    "section": "2.2 Using syntax",
-    "text": "2.2 Using syntax",
+    "objectID": "00-resources.html",
+    "href": "00-resources.html",
+    "title": "2  Pre-course resources",
+    "section": "",
+    "text": "2.1 Introductions to Bayesian inference",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-course resources</span>"
+    ]
+  },
+  {
+    "objectID": "05-ch4-stanmodels.html",
+    "href": "05-ch4-stanmodels.html",
+    "title": "4  Stan Models: Chapter 4",
+    "section": "",
+    "text": "4.1 Packages\nlibrary(cmdstanr)\nlibrary(rethinking)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Stan Models: Chapter 4</span>"
+    ]
+  },
+  {
+    "objectID": "05-ch4-stanmodels.html#model-4.1",
+    "href": "05-ch4-stanmodels.html#model-4.1",
+    "title": "4  Stan Models: Chapter 4",
+    "section": "4.2 Model 4.1",
+    "text": "4.2 Model 4.1\nThe data used in m4.1 comes from Howell1:\n\ndata(\"Howell1\") \n\nd &lt;- Howell1[ Howell1$age &gt;= 18 , ]\n\nhead(d)\n\n   height   weight age male\n1 151.765 47.82561  63    1\n2 139.700 36.48581  63    0\n3 136.525 31.86484  65    0\n4 156.845 53.04191  41    1\n5 145.415 41.27687  51    0\n6 163.830 62.99259  35    1\n\n\nThe model is defined as follows:\n\ndata {\n  int&lt;lower=0&gt; N;\n  array[N] real h;\n}\nparameters {\n  real mu;\n  real&lt;lower=0&gt; sigma;\n}\nmodel {\n  mu ~ normal(178, 20);\n  sigma ~ uniform(0.1,50);\n  h ~ normal(mu, sigma);\n}",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Stan Models: Chapter 4</span>"
+    ]
+  },
+  {
+    "objectID": "00-resources.html#introductions-to-bayesian-inference",
+    "href": "00-resources.html#introductions-to-bayesian-inference",
+    "title": "2  Pre-course resources",
+    "section": "",
+    "text": "Rasmus Bååth has created a three-part series introducing Bayesian data analysis Part 1, Part 2 and Part 3.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Pre-course resources</span>"
+    ]
+  },
+  {
+    "objectID": "01-notation.html#using-latex-syntax-in-quarto-documents",
+    "href": "01-notation.html#using-latex-syntax-in-quarto-documents",
+    "title": "3  Writing mathematical notation in quarto files",
+    "section": "3.2 Using \\(\\LaTeX\\) syntax in quarto documents",
+    "text": "3.2 Using \\(\\LaTeX\\) syntax in quarto documents\nWe can add inline mathematics using $1+2=3$, this will render to \\(1+2=3\\).",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
     ]
   }
 ]

@@ -1,0 +1,44 @@
+---
+title: "Stan Models: Chapter 4"
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Packages
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+
+library(cmdstanr)
+library(rethinking)
+```
+
+## Model 4.1
+
+The data used in `m4.1` comes from `Howell1`:
+
+```{r}
+
+data("Howell1") 
+
+d <- Howell1[ Howell1$age >= 18 , ]
+
+head(d)
+
+```
+
+
+
+
+
+The model is defined as follows:
+
+```{stan, eval=FALSE,output.var="m4.1", code=readLines('models/m4-1.stan')}
+
+```
+
+

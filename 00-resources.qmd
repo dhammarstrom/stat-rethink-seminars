@@ -1,0 +1,12 @@
+---
+title: "Pre-course resources"
+---
+
+## Introductions to Bayesian inference
+
+- Rasmus Bååth has created a three-part video-lecture introducing Bayesian data analysis [Part 1](https://youtu.be/3OJEae7Qb_o?si=Us9J3IoETr1Kp9ll), [Part 2](https://youtu.be/mAUwjSo5TJE?si=la5tYC3Vjf_SSdJo) and [Part 3](https://youtu.be/Ie-6H_r7I5A?si=FHbeCfkCisD1Ims6).
+
+- [A visual introduction to Bayesian inference](https://seeing-theory.brown.edu/bayesian-inference/index.html)
+
+
+
