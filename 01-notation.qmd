@@ -1,11 +1,11 @@
 # Writing mathematical notation in quarto files
 
-A quarto document can contain output from code chunks based on data, code and other technical content, including mathematical notation. $\LaTeX$ syntax is a well described system for writing mathematical notation, for example, in quarto files.
+A [quarto document](https://www.quarto.org) can contain output from code chunks based on data, code and other technical content, including mathematical notation. $\LaTeX$ syntax is a well described system for writing mathematical notation, for example, in quarto files.
 
 
 ## Why use mathematical notation?
 
-Similar to other written languages, mathematical notation helps you develop and communicate ideas. 
+Similar to other written languages, mathematical notation helps you develop and communicate ideas. In this course we will use formal descriptions of models to describe assumptions and what the code does. 
 
 
 ## Using $\LaTeX$ syntax in quarto documents
