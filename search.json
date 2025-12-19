@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Statistical Rethinking Seminars",
     "section": "",
-    "text": "1 Preface\nThese pages includes notes and resources for the Statistical Rethinking Seminars at the Faculty of Social and Health Sciences at the University of Inland Norway.",
+    "text": "1 Preface\nThese pages include notes and resources for the Statistical Rethinking Seminars at the Faculty of Social and Health Sciences, at the University of Inland Norway. The seminar series is organized as a course accredited as part of the PhD program Health and Welfare.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
     ]
@@ -14,49 +14,69 @@
     "href": "index.html#what-and-how-we-learn",
     "title": "Statistical Rethinking Seminars",
     "section": "1.1 What and How we learn",
-    "text": "1.1 What and How we learn\nThis series of seminars is based on the book Statistical Rethinking by Richard McElreath. The book introduces Bayesian statistics and probabilistic programming in the context of scientific research. The book helps you to develop a principled approach to statistical analysis.\nWe will meet every week for discussions. Meetings will organized as seminars where we aim to discuss the material and exercises from the book. This learning strategy requires that you are prepared to actively participate in the discussions. Preparation includes reading the relevant chapters, watching the lectures and working on the exercises.\nThe seminar series follows the same structure as the course given by Richard McElreath. Starting on the 10th of January 2025, we will meet every week for 10 weeks.",
+    "text": "1.1 What and How we learn\nThis series of seminars is based on the book Statistical Rethinking by Richard McElreath. The book introduces Bayesian statistics and probabilistic programming in the context of scientific research. The book helps you to develop a principled approach to statistical analysis.\nWe will meet every week for discussions. Meetings will be held as seminars to discuss the book’s material and exercises. This learning strategy requires you to prepare to participate actively in discussions. Preparation includes reading the relevant chapters, watching the lectures, and working on the exercises. Many exercises require coding in your preferred coding environment. The book mostly includes R code, but other programming languages have also been used to work on the material (see resources).\nThe seminar series follows the same structure as the course given by Richard McElreath (in 2025) Table 1.1. Beginning on the 22nd of January 2026, we will meet weekly for 10 weeks.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
     ]
   },
   {
-    "objectID": "index.html#prerequisites",
-    "href": "index.html#prerequisites",
+    "objectID": "index.html#prerequisites-and-resources",
+    "href": "index.html#prerequisites-and-resources",
     "title": "Statistical Rethinking Seminars",
-    "section": "1.2 Prerequisites",
-    "text": "1.2 Prerequisites\nThere are no formal prerequisites for the seminar series. However, knowing basic R programminmg will make your life easier.\nExperience with “traditional” statistical analysis will also be helpful.",
+    "section": "1.2 Prerequisites and resources",
+    "text": "1.2 Prerequisites and resources\nThere are no formal prerequisites for the seminar series. However, knowing basic R programming will make your experience easier when reading the book, watching the lectures, and completing the exercises. Experience with statistical analysis will also be helpful. The final assignment in the course will require you to perform a data analysis on data of your choosing. It is expected that the analysis is performed using reproducible programming. The R programming language and auxiliary tools are discussed here, along with instructions for setting up software for reproducible programming.\nYou can find resources related to Bayesian modelling here\n\n\n\nTable 1.1: The course schedule\n\n\n\n\n\nWeek\nDate (time)\nChapters\nLectures\n\n\n\n\n4\n2026-01-22 (13:00)\n1-3\n1, 2\n\n\n5\n2026-01-29 (13:00)\n4\n3, 4\n\n\n6\n2026-02-05 (13:00)\n5-6\n5, 6\n\n\n7\n2026-02-12 (13:00)\n7-9\n7, 8\n\n\n8\n2026-02-19 (13:00)\n10-11\n9, 10\n\n\n9\n2026-02-26 (13:00)\n11-12\n11, 12\n\n\n10\n2026-03-05 (13:00)\n13\n13, 14\n\n\n11\n2026-03-12 (13:00)\n14\n15, 16\n\n\n12\n2026-03-19 (13:00)\n15\n17, 18\n\n\n13\n2026-03-26 (13:00)\n16-17\n19, 20",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
     ]
   },
   {
-    "objectID": "index.html#resources",
-    "href": "index.html#resources",
-    "title": "Statistical Rethinking Seminars",
-    "section": "1.3 Resources",
-    "text": "1.3 Resources\n\nStatistical rethinking with brms, ggplot2, and the tidyverse: Second edition by Solomon Kurz is a thorough paralell reading of Statistical Rethinking with all models implemented in the brms package.",
+    "objectID": "00-resources.html",
+    "href": "00-resources.html",
+    "title": "2  Resources",
+    "section": "",
+    "text": "2.0.1 Introductions to Bayesian inference\n\nRasmus Bååth has created a three-part video-lecture introducing Bayesian data analysis Part 1, Part 2 and Part 3.\nA visual introduction to Bayesian inference\n\n\n\n2.0.2 Resources for fitting and learning Bayesian data modelling\n\nStatistical rethinking with brms, ggplot2, and the tidyverse: Second edition by Solomon Kurz is a thorough parallel reading of Statistical Rethinking with all models implemented in the brms package.\nThe brms Book: Applied Bayesian Regression Modelling Using R and Stan (Early Draft) by Paul Bürkner. This book introduces the brms package along with Bayesian regression modelling.\nThe stan user guide by the Stan Development Team provides examples on programming models in the Stan language.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Preface</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Resources</span>"
     ]
   },
   {
     "objectID": "01-notation.html",
     "href": "01-notation.html",
-    "title": "2  Writing mathematical notation in quarto files",
+    "title": "3  Writing mathematical notation in quarto files",
     "section": "",
-    "text": "2.1 Why use mathematical notation?\nA quarto document can contain output from code chunks based on data, code and other technical content, including mathematical notation. \\(LaTeX\\) syntax is a well described system for writing mathematical notation in quarto files.\nSimilar to other written languages, mathematical notation helps you develop and communicate ideas.",
+    "text": "3.1 Why use mathematical notation?\nA quarto document can contain output from code chunks based on data, code and other technical content, including mathematical notation. \\(\\LaTeX\\) syntax is a well described system for writing mathematical notation, for example, in quarto files.\nSimilar to other written languages, mathematical notation helps you develop and communicate ideas. In this course we will use formal descriptions of models to describe assumptions and what the code does.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
     ]
   },
   {
-    "objectID": "01-notation.html#using-latex-syntax",
-    "href": "01-notation.html#using-latex-syntax",
-    "title": "2  Writing mathematical notation in quarto files",
-    "section": "2.2 Using \\(LaTeX\\) syntax",
-    "text": "2.2 Using \\(LaTeX\\) syntax\nTo add",
+    "objectID": "01-notation.html#using-latex-syntax-in-quarto-documents",
+    "href": "01-notation.html#using-latex-syntax-in-quarto-documents",
+    "title": "3  Writing mathematical notation in quarto files",
+    "section": "3.2 Using \\(\\LaTeX\\) syntax in quarto documents",
+    "text": "3.2 Using \\(\\LaTeX\\) syntax in quarto documents\nWe can add inline mathematics using $1 + 2 = 3$, this will render to \\(1+2=3\\). Using two $ signs will put the equation on a new line.\n$$ 1 + 2 = 3$$\n\\[1+2=3\\]",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Writing mathematical notation in quarto files</span>"
+    ]
+  },
+  {
+    "objectID": "05-ch4-stanmodels.html",
+    "href": "05-ch4-stanmodels.html",
+    "title": "4  Stan Models: Chapter 4",
+    "section": "",
+    "text": "4.1 Packages\nlibrary(cmdstanr)\nlibrary(rethinking)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Stan Models: Chapter 4</span>"
+    ]
+  },
+  {
+    "objectID": "05-ch4-stanmodels.html#model-4.1",
+    "href": "05-ch4-stanmodels.html#model-4.1",
+    "title": "4  Stan Models: Chapter 4",
+    "section": "4.2 Model 4.1",
+    "text": "4.2 Model 4.1\nThe data used in m4.1 comes from Howell1:\n\ndata(\"Howell1\") \n\nd &lt;- Howell1[ Howell1$age &gt;= 18 , ]\n\nhead(d)\n\n   height   weight age male\n1 151.765 47.82561  63    1\n2 139.700 36.48581  63    0\n3 136.525 31.86484  65    0\n4 156.845 53.04191  41    1\n5 145.415 41.27687  51    0\n6 163.830 62.99259  35    1\n\n\nThe model is defined as follows:\n\ndata {\n  int&lt;lower=0&gt; N;\n  array[N] real h;\n}\nparameters {\n  real mu;\n  real&lt;lower=0&gt; sigma;\n}\nmodel {\n  mu ~ normal(178, 20);\n  sigma ~ uniform(0.1,50);\n  h ~ normal(mu, sigma);\n}",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Stan Models: Chapter 4</span>"
     ]
   }
 ]
