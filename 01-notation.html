@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -65,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./05-ch4-stanmodels.html" rel="next">
+<link href="./02-dags.html" rel="next">
 <link href="./00-resources.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -74,14 +94,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-f16cd255ecb5ae9510f6a112aa2ee9ab.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f3afb4d828d77514a78ff08d52625b9d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-f16cd255ecb5ae9510f6a112aa2ee9ab.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-232ebef096930321802e28d562d01725.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-c66b409fd45ad494cff560d16e72e358.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-232ebef096930321802e28d562d01725.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2e93264c960b0304603dc3e36b520cb7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-2e93264c960b0304603dc3e36b520cb7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-2e93264c960b0304603dc3e36b520cb7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-682deb52c6d3ee4f5acf555a66732406.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-682deb52c6d3ee4f5acf555a66732406.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-682deb52c6d3ee4f5acf555a66732406.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -201,10 +221,27 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-ch4-stanmodels.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stan Models: Chapter 4</span></span></a>
+  <a href="./02-dags.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Drawing Directed Acyclic Graphs</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Chapter notes and Stan models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-ch4-stanmodels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Chapter 4: Geocentric models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -215,8 +252,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-use-mathematical-notation" id="toc-why-use-mathematical-notation" class="nav-link active" data-scroll-target="#why-use-mathematical-notation"><span class="header-section-number">3.1</span> Why use mathematical notation?</a></li>
-  <li><a href="#using-latex-syntax-in-quarto-documents" id="toc-using-latex-syntax-in-quarto-documents" class="nav-link" data-scroll-target="#using-latex-syntax-in-quarto-documents"><span class="header-section-number">3.2</span> Using <span class="math inline">\(\LaTeX\)</span> syntax in quarto documents</a></li>
+  <li><a href="#using-latex-syntax-in-quarto-documents---the-basics" id="toc-using-latex-syntax-in-quarto-documents---the-basics" class="nav-link active" data-scroll-target="#using-latex-syntax-in-quarto-documents---the-basics"><span class="header-section-number">3.1</span> Using <span class="math inline">\(\LaTeX\)</span> syntax in quarto documents - The basics</a></li>
+  <li><a href="#a-language-for-describing-models" id="toc-a-language-for-describing-models" class="nav-link" data-scroll-target="#a-language-for-describing-models"><span class="header-section-number">3.2</span> A language for describing models</a></li>
+  <li><a href="#operatorname-and-text" id="toc-operatorname-and-text" class="nav-link" data-scroll-target="#operatorname-and-text"><span class="header-section-number">3.3</span> Operatorname and text</a></li>
+  <li><a href="#subscript-and-superscript" id="toc-subscript-and-superscript" class="nav-link" data-scroll-target="#subscript-and-superscript"><span class="header-section-number">3.4</span> Subscript and superscript</a></li>
   </ul>
 </nav>
     </div>
@@ -242,20 +281,231 @@ window.Quarto = {
 </header>
 
 
-<p>A <a href="https://www.quarto.org">quarto document</a> can contain output from code chunks based on data, code and other technical content, including mathematical notation. <span class="math inline">\(\LaTeX\)</span> syntax is a well described system for writing mathematical notation, for example, in quarto files.</p>
-<section id="why-use-mathematical-notation" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="why-use-mathematical-notation"><span class="header-section-number">3.1</span> Why use mathematical notation?</h2>
-<p>Similar to other written languages, mathematical notation helps you develop and communicate ideas. In this course we will use formal descriptions of models to describe assumptions and what the code does.</p>
-</section>
-<section id="using-latex-syntax-in-quarto-documents" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="using-latex-syntax-in-quarto-documents"><span class="header-section-number">3.2</span> Using <span class="math inline">\(\LaTeX\)</span> syntax in quarto documents</h2>
+<p>A <a href="https://www.quarto.org">quarto document</a> can be used to combine code, code outputs (e.g., calculations, figures, and tables), and other technical content, including mathematical notation. Similar to other written languages, mathematical notation helps you develop and communicate ideas. In this course, we will use formal model descriptions to specify model assumptions. However, the technical aspects of writing mathematical notation are not obvious. Therefore, the following is an attempt to introduce <span class="math inline">\(\LaTeX\)</span> syntax for mathematical notation. <span class="math inline">\(LaTeX\)</span> is a well-described system for writing technical documents, including mathematical notation, for example, in quarto files, but also in other source document formats.</p>
+<section id="using-latex-syntax-in-quarto-documents---the-basics" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="using-latex-syntax-in-quarto-documents---the-basics"><span class="header-section-number">3.1</span> Using <span class="math inline">\(\LaTeX\)</span> syntax in quarto documents - The basics</h2>
 <p>We can add inline mathematics using <code>$1 + 2 = 3$</code>, this will render to <span class="math inline">\(1+2=3\)</span>. Using two <code>$</code> signs will put the equation on a new line.</p>
 <p><code>$$ 1 + 2 = 3$$</code></p>
 <p><span class="math display">\[1+2=3\]</span></p>
+<p>Mathematical operators are rendered as is, and from special operator commands (<a href="#tbl-mathop" class="quarto-xref">Table&nbsp;<span>3.1</span></a>).</p>
+<div id="tbl-mathop" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mathop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: Syntax for basic mathematical notation
+</figcaption>
+<div aria-describedby="tbl-mathop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Syntax</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td><span class="math inline">\(+\)</span></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td><span class="math inline">\(-\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>\times</code></td>
+<td><span class="math inline">\(\times\)</span></td>
+</tr>
+<tr class="even">
+<td><code>\frac{a}{b}</code></td>
+<td><span class="math inline">\(\frac{a}{b}\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>\sqrt{a + b}</code></td>
+<td><span class="math inline">\(\sqrt{a + b}\)</span></td>
+</tr>
+<tr class="even">
+<td><code>a^2</code></td>
+<td><span class="math inline">\(a^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>y_i</code></td>
+<td><span class="math inline">\(y_i\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Greek letters are similarly rendered using specific syntax (<a href="#tbl-greek" class="quarto-xref">Table&nbsp;<span>3.2</span></a>).</p>
+<div id="tbl-greek" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-greek-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.2: Syntax for Greek letter
+</figcaption>
+<div aria-describedby="tbl-greek-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>\alpha A</code> <span class="math inline">\(\alpha A\)</span></td>
+<td><code>\beta B</code> <span class="math inline">\(\beta B\)</span></td>
+<td><code>\gamma \Gamma</code> <span class="math inline">\(\gamma \Gamma\)</span></td>
+<td><code>\delta \Delta</code> <span class="math inline">\(\delta \Delta\)</span></td>
+</tr>
+<tr class="even">
+<td><code>\epsilon \varepsilon E</code><span class="math inline">\(\epsilon \varepsilon E\)</span></td>
+<td><code>\zeta Z</code><span class="math inline">\(\zeta Z\)</span></td>
+<td><code>\eta H</code> <span class="math inline">\(\eta H\)</span></td>
+<td><code>\theta \vartheta \Theta</code><span class="math inline">\(\theta \vartheta \Theta\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>\iota I</code><span class="math inline">\(\iota I\)</span></td>
+<td><code>\kappa K</code> <span class="math inline">\(\kappa K\)</span></td>
+<td><code>\lambda \Lambda</code> <span class="math inline">\(\lambda \Lambda\)</span></td>
+<td><code>\mu M</code> <span class="math inline">\(\mu M\)</span></td>
+</tr>
+<tr class="even">
+<td><code>\nu N</code> <span class="math inline">\(\nu N\)</span></td>
+<td><code>\xi \Xi</code><span class="math inline">\(\xi \Xi\)</span></td>
+<td><code>o O</code><span class="math inline">\(o O\)</span></td>
+<td><code>\pi \Pi</code><span class="math inline">\(\pi \Pi\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>\rho \varrho P</code><span class="math inline">\(\rho \varrho P\)</span></td>
+<td><code>\sigma \Sigma</code> <span class="math inline">\(\sigma \Sigma\)</span></td>
+<td><code>\tau T</code> <span class="math inline">\(\tau T\)</span></td>
+<td><code>\upsilon \Upsilon</code> <span class="math inline">\(\upsilon \Upsilon\)</span></td>
+</tr>
+<tr class="even">
+<td><code>\phi \varphi \Phi</code> <span class="math inline">\(\phi \varphi \Phi\)</span></td>
+<td><code>\chi X</code> <span class="math inline">\(\chi X\)</span></td>
+<td><code>\psi \Psi</code><span class="math inline">\(\psi \Psi\)</span></td>
+<td><code>\omega \Omega</code> <span class="math inline">\(\omega \Omega\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="a-language-for-describing-models" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="a-language-for-describing-models"><span class="header-section-number">3.2</span> A language for describing models</h2>
+<p>McElreath <span class="citation" data-cites="rethink2020">(<a href="#ref-rethink2020" role="doc-biblioref">McElreath 2020, 77</a>)</span> uses multi-line equations to describe models. We can reproduce this output using the align environment in LaTeX.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="er">$</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y_i <span class="sc">&amp;</span>\sim \text{Normal}(\mu_i,\sigma) \\</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>\mu_i <span class="sc">&amp;</span><span class="er">=</span> \beta x_i \\</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>\beta <span class="sc">&amp;</span>\sim \text{Normal}(<span class="dv">0</span>,<span class="dv">10</span>) \\</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>\sigma <span class="sc">&amp;</span>\sim \text{Exponential}(<span class="dv">1</span>) \\</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>x_i <span class="sc">&amp;</span>\sim \text{Normal}(<span class="dv">0</span>,<span class="dv">1</span>) \\</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="er">$</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="math display">\[
+\begin{align}
+y_i &amp;\sim \text{Normal}(\mu_i,\sigma) \\
+\mu_i &amp;= \beta x_i \\
+\beta &amp;\sim \text{Normal}(0,10) \\
+\sigma &amp;\sim \text{Exponential}(1) \\
+x_i &amp;\sim \text{Normal}(0,1) \\
+\end{align}
+\]</span></p>
+</div>
+</div>
+<p>In the example above, <code>\\</code> will create a new line and using the align environment with the <code>&amp;</code> operator creates alignment points for each line. I’ve put the alignment points on <code>\sim</code> and <code>=</code> operators to replicate the description in the book.</p>
+</section>
+<section id="operatorname-and-text" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="operatorname-and-text"><span class="header-section-number">3.3</span> Operatorname and text</h2>
+<p>We will often use short-hand descriptions of probability distributions with corresponding parameters like <span class="math inline">\(\text{Normal}(\mu,\sigma)\)</span>, <span class="math inline">\(\text{Binomial}(N, p)\)</span>, or <span class="math inline">\(\text{Uniform}(\min, \max)\)</span>. In these examples (and the exmaple above), I’ve used <code>\text{Normal}(\mu, \sigma)</code> to define the distribution (Normal). Using <code>\text</code> can have consequences for readability and an alternative can be <code>\operatorname</code> which respect spacing between operators in an equation. Using <code>\text</code> or <code>\operatorname</code> will both render text.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<pre class="code cell-code"><code>$$
+\text{Pr}(p|w,n) = 
+  \frac{\text{Binomial}(w|n,p)\text{Uniform}(p|0,1)}
+{\int\text{Binomial}(w|n,p)\text{Uniform}(p|0,1)dp}
+$$</code></pre>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+\text{Pr}(p|w,n) =
+\frac{\text{Binomial}(w|n,p)\text{Uniform}(p|0,1)}
+{\int\text{Binomial}(w|n,p)\text{Uniform}(p|0,1)dp}
+\]</span></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<pre class="code cell-code"><code>$$
+\operatorname{Pr}(p|w,n) = \frac{\operatorname{Binomial}(w|n,p)\operatorname{Uniform}(p|0,1)}
+{\int\operatorname{Binomial}(w|n,p)\operatorname{Uniform}(p|0,1)dp}
+$$</code></pre>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[
+\operatorname{Pr}(p|w,n) = \frac{\operatorname{Binomial}(w|n,p)\operatorname{Uniform}(p|0,1)}{\int\operatorname{Binomial}(w|n,p)\operatorname{Uniform}(p|0,1)dp}
+\]</span></p>
+</div>
+</div>
+<p>In the equations above, using the <code>\operatorname</code> instead of <code>\text</code> introduce a space between operators. This is also obvious when using built in operators, such as <code>\log</code> compared to writing <code>\text{log}</code></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>a \log b</code></p>
+<p><code>a \operatorname{log} b</code></p>
+<p><code>a \text{log} b</code></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math inline">\(a \log b\)</span></p>
+<p><span class="math inline">\(a \operatorname{log} b\)</span></p>
+<p><span class="math inline">\(a \text{log} b\)</span></p>
+</div>
+</div>
+</section>
+<section id="subscript-and-superscript" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="subscript-and-superscript"><span class="header-section-number">3.4</span> Subscript and superscript</h2>
+<p>Subscripts and superscripts can be used to indicate indices or mathematical operations.</p>
+<p>To create a subscript in math mode (using e.g., <code>$</code>), we can use the <code>_</code> operator. E.g., the i:th observation of heights can be referenced as <code>h_i</code>, rendering to <span class="math inline">\(h_i\)</span>. Subscripts can be expanded to multi-character using curly brackets, e.g., <code>h_{i,j}</code> renders to <span class="math inline">\(h_{i,j}\)</span>. Subscripts can also be nested using e.g., <code>h_{i_j}</code>, rendering to <span class="math inline">\(h_{i_j}\)</span>. Note that McElreath often uses square brackets for nested subscripts to improve readability, e.g., <span class="math inline">\(\operatorname{logit}(p_i) = \alpha_{\text{TANK}[i]}\)</span> (<code>\operatorname{logit}(p_i) = \alpha_{\text{TANK}[i]}</code>, <span class="citation" data-cites="rethink2020">(<a href="#ref-rethink2020" role="doc-biblioref">McElreath 2020, 403</a>)</span>).</p>
+<p>Superscripts are create using the <code>^</code> operator in math mode. E.g., <span class="math inline">\(c^2 = a^2 + b^2\)</span> (<code>c^2 = a^2 + b^2</code>). Similarly to the subscript syntax, superscripts can be nested and contain multiple characters and operators. Additionally, superscript and subscripts can be combined, also with mathematical operators.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>n^{k+1}</code></p>
+<p><code>h_{i,j}^2</code></p>
+<p><code>\sum_{i=1}^n</code></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math inline">\(n^{k+1}\)</span></p>
+<p><span class="math inline">\(h_{i,j}^{k+1}\)</span></p>
+<p><span class="math inline">\(\sum_{i=1}^n (x_i - \bar{x})^2\)</span></p>
+</div>
+</div>
+<p>Notice that some rendering will be different when switching from inline to display mode.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>$\sum_{i=1}^n (x_i - \bar{x})^2$</code></p>
+<p><code>$$</code> <code>\sum_{i=1}^n (x_i - \bar{x})^2</code> <code>$$</code></p>
+</div><div class="column" style="width:50%;">
+<p><span class="math inline">\(\sum_{i=1}^n (x_i - \bar{x})^2\)</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^n (x_i - \bar{x})^2
+\]</span></p>
+</div>
+</div>
 
 
 <!-- -->
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-rethink2020" class="csl-entry" role="listitem">
+McElreath, Richard. 2020. <em>Statistical Rethinking: A <span>Bayesian</span> Course with Examples in <span>R</span> and <span>Stan</span></em>. Second edition. Chapman &amp; <span>Hall</span>/<span>CRC</span> Texts in Statistical Science Series. Boca Raton: CRC Press.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -717,46 +967,251 @@ window.Quarto = {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05-ch4-stanmodels.html" class="pagination-link" aria-label="Stan Models: Chapter 4">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stan Models: Chapter 4</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02-dags.html" class="pagination-link" aria-label="Drawing Directed Acyclic Graphs">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Drawing Directed Acyclic Graphs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Writing mathematical notation in quarto files</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="co">[</span><span class="ot">quarto document</span><span class="co">](https://www.quarto.org)</span> can contain output from code chunks based on data, code and other technical content, including mathematical notation. $\LaTeX$ syntax is a well described system for writing mathematical notation, for example, in quarto files.</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why use mathematical notation?</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Similar to other written languages, mathematical notation helps you develop and communicate ideas. In this course we will use formal descriptions of models to describe assumptions and what the code does. </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using $\LaTeX$ syntax in quarto documents</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>We can add inline mathematics using <span class="in">`$1 + 2 = 3$`</span>, this will render to $1+2=3$. Using two <span class="in">`$`</span> signs will put the equation on a new line.</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="in">`$$ 1 + 2 = 3$$`</span> </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>$$1+2=3$$</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Writing mathematical notation in quarto files</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>A <span class="co">[</span><span class="ot">quarto document</span><span class="co">](https://www.quarto.org)</span> can be used to combine code, code outputs (e.g., calculations, figures, and tables), and other technical content, including mathematical notation. Similar to other written languages, mathematical notation helps you develop and communicate ideas. In this course, we will use formal model descriptions to specify model assumptions. However, the technical aspects of writing mathematical notation are not obvious. Therefore, the following is an attempt to introduce $\LaTeX$ syntax for mathematical notation. $LaTeX$ is a well-described system for writing technical documents, including mathematical notation, for example, in quarto files, but also in other source document formats. </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using $\LaTeX$ syntax in quarto documents - The basics</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>We can add inline mathematics using <span class="in">`$1 + 2 = 3$`</span>, this will render to $1+2=3$. Using two <span class="in">`$`</span> signs will put the equation on a new line.</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in">`$$ 1 + 2 = 3$$`</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>$$1+2=3$$</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>Mathematical operators are rendered as is, and from special operator commands (@tbl-mathop).</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>Syntax <span class="pp">|</span>Output<span class="pp">|</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`+`</span><span class="pp">|</span>$+$<span class="pp">|</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`-`</span><span class="pp">|</span>$-$<span class="pp">|</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\times`</span><span class="pp">|</span>$\times$<span class="pp">|</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\frac{a}{b}`</span><span class="pp">|</span>$\frac{a}{b}$<span class="pp">|</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\sqrt{a + b}`</span><span class="pp">|</span>$\sqrt{a + b}$<span class="pp">|</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`a^2`</span><span class="pp">|</span>$a^2$<span class="pp">|</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`y_i`</span><span class="pp">|</span>$y_i$<span class="pp">|</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>: Syntax for basic mathematical notation {#tbl-mathop}</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>Greek letters are similarly rendered using specific syntax (@tbl-greek). </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\alpha A`</span> $\alpha A$ <span class="pp">|</span>    <span class="in">`\beta B`</span> $\beta B$ <span class="pp">|</span><span class="in">`\gamma \Gamma`</span> $\gamma \Gamma$<span class="pp">|</span><span class="in">`\delta \Delta`</span> $\delta \Delta$<span class="pp">|</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\epsilon \varepsilon E`</span>$\epsilon \varepsilon E$<span class="pp">|</span>  <span class="in">`\zeta Z`</span>$\zeta Z$ <span class="pp">|</span>    <span class="in">`\eta H`</span> $\eta H$<span class="pp">|</span><span class="in">`\theta \vartheta \Theta`</span>$\theta \vartheta \Theta$<span class="pp">|</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\iota I`</span>$\iota I$<span class="pp">|</span><span class="in">`\kappa K`</span> $\kappa K$<span class="pp">|</span>  <span class="in">`\lambda \Lambda`</span> $\lambda \Lambda$ <span class="pp">|</span><span class="in">`\mu M`</span> $\mu M$ <span class="pp">|</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\nu N`</span> $\nu N$<span class="pp">|</span><span class="in">`\xi \Xi`</span>$\xi \Xi$<span class="pp">|</span><span class="in">`o O`</span>$o O$<span class="pp">|</span><span class="in">`\pi \Pi`</span>$\pi \Pi$<span class="pp">|</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\rho \varrho P`</span>$\rho \varrho P$<span class="pp">|</span><span class="in">`\sigma \Sigma`</span> $\sigma \Sigma$<span class="pp">|</span><span class="in">`\tau T`</span> $\tau T$<span class="pp">|</span><span class="in">`\upsilon \Upsilon`</span> $\upsilon \Upsilon$<span class="pp">|</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span><span class="in">`\phi \varphi \Phi`</span> $\phi \varphi \Phi$<span class="pp">|</span><span class="in">`\chi X`</span> $\chi X$<span class="pp">|</span><span class="in">`\psi \Psi`</span>$\psi \Psi$<span class="pp">|</span><span class="in">`\omega \Omega`</span> $\omega \Omega$<span class="pp">|</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>: Syntax for Greek letter {#tbl-greek}</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## A language for describing models </span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>McElreath <span class="co">[</span><span class="ot">@rethink2020, pp. 77</span><span class="co">]</span> uses multi-line equations to describe models. We can reproduce this output using the align environment in LaTeX. </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="er">$</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>y_i <span class="sc">&amp;</span>\sim \text{Normal}(\mu_i,\sigma) \\</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>\mu_i <span class="sc">&amp;</span><span class="er">=</span> \beta x_i \\</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>\beta <span class="sc">&amp;</span>\sim \text{Normal}(<span class="dv">0</span>,<span class="dv">10</span>) \\</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>\sigma <span class="sc">&amp;</span>\sim \text{Exponential}(<span class="dv">1</span>) \\</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>x_i <span class="sc">&amp;</span>\sim \text{Normal}(<span class="dv">0</span>,<span class="dv">1</span>) \\</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="er">$</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>y_i &amp;\sim \text{Normal}(\mu_i,\sigma) <span class="sc">\\</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>\mu_i &amp;= \beta x_i <span class="sc">\\</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>\beta &amp;\sim \text{Normal}(0,10) <span class="sc">\\</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>\sigma &amp;\sim \text{Exponential}(1) <span class="sc">\\</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>x_i &amp;\sim \text{Normal}(0,1) <span class="sc">\\</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>In the example above, <span class="in">`\\`</span> will create a new line and using the align environment with the <span class="in">`&amp;`</span> operator creates alignment points for each line. I've put the alignment points on <span class="in">`\sim`</span> and <span class="in">`=`</span> operators to replicate the description in the book.   </span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## Operatorname and text</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>We will often use short-hand descriptions of probability distributions with corresponding parameters like $\text{Normal}(\mu,\sigma)$, $\text{Binomial}(N, p)$, or $\text{Uniform}(\min, \max)$. In these examples (and the exmaple above), I've used <span class="in">`\text{Normal}(\mu, \sigma)`</span> to define the distribution (Normal). Using <span class="in">`\text`</span> can have consequences for readability and an alternative can be <span class="in">`\operatorname`</span> which respect spacing between operators in an equation. Using <span class="in">`\text`</span> or <span class="in">`\operatorname`</span> will both render text.</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{code}</span></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>\text<span class="op">{</span>Pr<span class="op">}(</span>p<span class="op">|</span>w<span class="op">,</span>n<span class="op">)</span> <span class="op">=</span> </span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>  \frac<span class="op">{</span>\text<span class="op">{</span>Binomial<span class="op">}(</span>w<span class="op">|</span>n<span class="op">,</span>p<span class="op">)</span>\text<span class="op">{</span>Uniform<span class="op">}(</span>p<span class="op">|</span><span class="dv">0</span><span class="op">,</span><span class="dv">1</span><span class="op">)}</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="op">{</span>\<span class="dt">int</span>\text<span class="op">{</span>Binomial<span class="op">}(</span>w<span class="op">|</span>n<span class="op">,</span>p<span class="op">)</span>\text<span class="op">{</span>Uniform<span class="op">}(</span>p<span class="op">|</span><span class="dv">0</span><span class="op">,</span><span class="dv">1</span><span class="op">)</span>dp<span class="op">}</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>\text{Pr}(p|w,n) = </span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>\frac{\text{Binomial}(w|n,p)\text{Uniform}(p|0,1)}</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>{\int\text{Binomial}(w|n,p)\text{Uniform}(p|0,1)dp}</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{code}</span></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>\operatorname<span class="op">{</span>Pr<span class="op">}(</span>p<span class="op">|</span>w<span class="op">,</span>n<span class="op">)</span> <span class="op">=</span> \frac<span class="op">{</span>\operatorname<span class="op">{</span>Binomial<span class="op">}(</span>w<span class="op">|</span>n<span class="op">,</span>p<span class="op">)</span>\operatorname<span class="op">{</span>Uniform<span class="op">}(</span>p<span class="op">|</span><span class="dv">0</span><span class="op">,</span><span class="dv">1</span><span class="op">)}</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="op">{</span>\<span class="dt">int</span>\operatorname<span class="op">{</span>Binomial<span class="op">}(</span>w<span class="op">|</span>n<span class="op">,</span>p<span class="op">)</span>\operatorname<span class="op">{</span>Uniform<span class="op">}(</span>p<span class="op">|</span><span class="dv">0</span><span class="op">,</span><span class="dv">1</span><span class="op">)</span>dp<span class="op">}</span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>\operatorname{Pr}(p|w,n) = \frac{\operatorname{Binomial}(w|n,p)\operatorname{Uniform}(p|0,1)}{\int\operatorname{Binomial}(w|n,p)\operatorname{Uniform}(p|0,1)dp}</span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a>In the equations above, using the <span class="in">`\operatorname`</span> instead of <span class="in">`\text`</span> introduce a space between operators. This is also obvious when using built in operators, such as <span class="in">`\log`</span> compared to writing <span class="in">`\text{log}`</span></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="in">`a \log b`</span></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a><span class="in">`a \operatorname{log} b`</span></span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a><span class="in">`a \text{log} b`</span></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>$a \log b$</span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>$a \operatorname{log} b$</span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>$a \text{log} b$</span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subscript and superscript </span></span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>Subscripts and superscripts can be used to indicate indices or mathematical operations.</span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>To create a subscript in math mode (using e.g., <span class="in">`$`</span>), we can use the <span class="in">`_`</span> operator. E.g., the i:th observation of heights can be referenced as <span class="in">`h_i`</span>, rendering to $h_i$. Subscripts can be expanded to multi-character using curly brackets, e.g., <span class="in">`h_{i,j}`</span> renders to $h_{i,j}$. Subscripts can also be nested using e.g., <span class="in">`h_{i_j}`</span>, rendering to $h_{i_j}$. Note that McElreath often uses square brackets for nested subscripts to improve readability, e.g., $\operatorname{logit}(p_i) = \alpha_{\text{TANK}<span class="co">[</span><span class="ot">i</span><span class="co">]</span>}$ (<span class="in">`\operatorname{logit}(p_i) = \alpha_{\text{TANK}[i]}`</span>, <span class="co">[</span><span class="ot">@rethink2020, pp. 403</span><span class="co">]</span>). </span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>Superscripts are create using the <span class="in">`^`</span> operator in math mode. E.g., $c^2 = a^2 + b^2$ (<span class="in">`c^2 = a^2 + b^2`</span>). Similarly to the subscript syntax, superscripts can be nested and contain multiple characters and operators. Additionally, superscript and subscripts can be combined, also with mathematical operators.</span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a><span class="in">`n^{k+1}`</span></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a><span class="in">`h_{i,j}^2`</span></span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a><span class="in">`\sum_{i=1}^n`</span></span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a>$n^{k+1}$</span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a>$h_{i,j}^{k+1}$</span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a>$\sum_{i=1}^n (x_i - \bar{x})^2$</span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a>Notice that some rendering will be different when switching from inline to display mode.</span>
+<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a><span class="in">`$\sum_{i=1}^n (x_i - \bar{x})^2$`</span></span>
+<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a><span class="in">`$$`</span></span>
+<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a><span class="in">`\sum_{i=1}^n (x_i - \bar{x})^2`</span></span>
+<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a><span class="in">`$$`</span> </span>
+<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a>::: {.column width="50%"}</span>
+<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a>$\sum_{i=1}^n (x_i - \bar{x})^2$</span>
+<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^n (x_i - \bar{x})^2</span>
+<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
