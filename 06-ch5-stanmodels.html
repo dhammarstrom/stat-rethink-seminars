@@ -252,6 +252,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Chapter 6: The Haunted Dag &amp; The Causal Terror</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-ch11-stanmodels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Chapter 11: God Spiked the Integers</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -439,62 +445,45 @@ McElreath, Richard. 2020. <em>Statistical Rethinking: A <span>Bayesian</span> Co
 
 Chain 1 Iteration:    1 / 3000 [  0%]  (Warmup) 
 Chain 1 Iteration: 1000 / 3000 [ 33%]  (Warmup) 
-Chain 1 Iteration: 1001 / 3000 [ 33%]  (Sampling) </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Chain 1 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Chain 1 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in 'C:/Users/706194/AppData/Local/Temp/Rtmpk1AxMq/model-53707e8a7aaf.stan', line 31, column 4 to column 26)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Chain 1 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Chain 1 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Chain 1 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Chain 1 Iteration: 2000 / 3000 [ 66%]  (Sampling) 
+Chain 1 Iteration: 1001 / 3000 [ 33%]  (Sampling) 
+Chain 1 Iteration: 2000 / 3000 [ 66%]  (Sampling) 
 Chain 1 Iteration: 3000 / 3000 [100%]  (Sampling) 
 Chain 1 finished in 0.2 seconds.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="ot">&lt;-</span> fit5<span class="fl">.1</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="ot">&lt;-</span> fit5<span class="fl">.1</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Plotting the posterior and data provides a check for the model.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a, ba, .iteration) <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_grid</span>(<span class="at">A =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_pred =</span> a <span class="sc">+</span> ba <span class="sc">*</span> A) <span class="sc">|&gt;</span> </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">.by =</span> A, </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">m =</span> <span class="fu">mean</span>(y_pred), </span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">lwr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.055</span>), </span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">upr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.945</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(A, m)) <span class="sc">+</span> </span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, </span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> upr ), </span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()  <span class="sc">+</span> </span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">A =</span> dl<span class="sc">$</span>A, </span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">D =</span> dl<span class="sc">$</span>D), </span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(A, D)) <span class="sc">+</span> </span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">round</span>(x <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>MedianAgeMarriage) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>MedianAgeMarriage),<span class="dv">1</span>),</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Median age at marriage"</span>) <span class="sc">+</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(y) <span class="fu">round</span>(y <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>Divorce) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>Divorce),<span class="dv">1</span>),</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Divorce rate"</span>) <span class="sc">+</span> </span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a, ba, .iteration) <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_grid</span>(<span class="at">A =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_pred =</span> a <span class="sc">+</span> ba <span class="sc">*</span> A) <span class="sc">|&gt;</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">.by =</span> A, </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">m =</span> <span class="fu">mean</span>(y_pred), </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">lwr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.055</span>), </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">upr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.945</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(A, m)) <span class="sc">+</span> </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> upr ), </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()  <span class="sc">+</span> </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">A =</span> dl<span class="sc">$</span>A, </span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">D =</span> dl<span class="sc">$</span>D), </span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(A, D)) <span class="sc">+</span> </span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">round</span>(x <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>MedianAgeMarriage) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>MedianAgeMarriage),<span class="dv">1</span>),</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Median age at marriage"</span>) <span class="sc">+</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(y) <span class="fu">round</span>(y <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>Divorce) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>Divorce),<span class="dv">1</span>),</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Divorce rate"</span>) <span class="sc">+</span> </span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Dropping 'draws_df' class as required metadata was removed.</code></pre>
 </div>
@@ -525,60 +514,60 @@ D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) \\
 \]</span></p>
 </div><div class="column" style="width:60%;">
 <div class="cell" data-output.var="m5.2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Model 5.2 </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">This model keeps the flag for prior sampling</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">It changes from model 5.1 by including another</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">predictor variable, M for marriage rate. </span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// Number of obs</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] D;    <span class="co">// Divorce rate</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] M;    <span class="co">// Marriage rate</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Prior only flag</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">  will be used to enable prior </span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">  simulations from the model. Set to 1 if </span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">  sampling from prior only. */</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; prior_only;</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;               <span class="co">// Intercept</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> bm;              <span class="co">// Slope for M</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma;  <span class="co">// Sigma with lwr bound</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> mu;</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    mu[i] = a + bm * M[i];</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  a ~ normal(<span class="dv">0</span>, <span class="fl">0.2</span>);</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  bm ~ normal(<span class="dv">0</span>, <span class="fl">0.5</span>);</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  sigma ~ exponential(<span class="dv">1</span>);</span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (prior_only == <span class="dv">0</span>) {</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    D ~ normal(mu, sigma);</span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>} </span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> y_rep;</span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  y_rep = normal_rng(mu, sigma);</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Model 5.2 </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">This model keeps the flag for prior sampling</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">It changes from model 5.1 by including another</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">predictor variable, M for marriage rate. </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// Number of obs</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] D;    <span class="co">// Divorce rate</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] M;    <span class="co">// Marriage rate</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Prior only flag</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">  will be used to enable prior </span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">  simulations from the model. Set to 1 if </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">  sampling from prior only. */</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; prior_only;</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;               <span class="co">// Intercept</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> bm;              <span class="co">// Slope for M</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma;  <span class="co">// Sigma with lwr bound</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> mu;</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    mu[i] = a + bm * M[i];</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  a ~ normal(<span class="dv">0</span>, <span class="fl">0.2</span>);</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  bm ~ normal(<span class="dv">0</span>, <span class="fl">0.5</span>);</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  sigma ~ exponential(<span class="dv">1</span>);</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (prior_only == <span class="dv">0</span>) {</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    D ~ normal(mu, sigma);</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> y_rep;</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  y_rep = normal_rng(mu, sigma);</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-2.stan"</span>, </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-2.exe"</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.2</span> <span class="ot">&lt;-</span> m5<span class="fl">.2</span><span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-2.stan"</span>, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-2.exe"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.2</span> <span class="ot">&lt;-</span> m5<span class="fl">.2</span><span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 1 chain...
 
@@ -587,19 +576,19 @@ Chain 1 Iteration: 1000 / 3000 [ 33%]  (Warmup)
 Chain 1 Iteration: 1001 / 3000 [ 33%]  (Sampling) 
 Chain 1 Iteration: 2000 / 3000 [ 66%]  (Sampling) 
 Chain 1 Iteration: 3000 / 3000 [100%]  (Sampling) 
-Chain 1 finished in 0.3 seconds.</code></pre>
+Chain 1 finished in 0.2 seconds.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.2</span> <span class="ot">&lt;-</span> fit5<span class="fl">.2</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.2</span> <span class="ot">&lt;-</span> fit5<span class="fl">.2</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>100 vector or matrix parameters hidden. Use depth=2 to show them.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             mean        sd       5.5%     94.5%     rhat ess_bulk
-a     0.002531486 0.1104371 -0.1738302 0.1747293 1.001572 1659.330
-bm    0.346264978 0.1284716  0.1364232 0.5541529 1.001377 1807.259
-sigma 0.949924199 0.1027101  0.7955757 1.1249115 1.000574 1780.094</code></pre>
+<pre><code>               mean         sd       5.5%     94.5%      rhat ess_bulk
+a     -0.0007510782 0.11335820 -0.1848731 0.1820434 1.0008249 1641.079
+bm     0.3482612032 0.13454620  0.1390926 0.5667404 0.9999204 1947.066
+sigma  0.9496538957 0.09132949  0.8161046 1.1039732 1.0007430 1677.582</code></pre>
 </div>
 </div>
 </section>
@@ -620,65 +609,65 @@ D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) \\
 \]</span></p>
 </div><div class="column" style="width:60%;">
 <div class="cell" data-output.var="m5.3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Model 5.3 </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">This model keeps the flag for prior sampling</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">It extends model 5.1 by including an additional</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">predictor variable, M for marriage rate. </span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// Number of obs</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] D;    <span class="co">// Divorce rate</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] A;    <span class="co">// Age at marriage</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] M;    <span class="co">// Marriage rate</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Prior only flag</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">  will be used to enable prior </span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">  simulations from the model. Set to 1 if </span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">  sampling from prior only. */</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; prior_only;</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;               <span class="co">// Intercept</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> ba;              <span class="co">// Slope for A</span></span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> bm;              <span class="co">// Slope for M</span></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma;  <span class="co">// Sigma with lwr bound</span></span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> mu;</span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    mu[i] = a + ba * A[i] + bm * M[i];</span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>  a ~ normal(<span class="dv">0</span>, <span class="fl">0.2</span>);</span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>  ba ~ normal(<span class="dv">0</span>, <span class="fl">0.5</span>);</span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  bm ~ normal(<span class="dv">0</span>, <span class="fl">0.5</span>);</span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  sigma ~ exponential(<span class="dv">1</span>);</span>
-<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (prior_only == <span class="dv">0</span>) {</span>
-<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>    D ~ normal(mu, sigma);</span>
-<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>} </span>
-<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> y_rep;</span>
-<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>  y_rep = normal_rng(mu, sigma);</span>
-<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Model 5.3 </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">This model keeps the flag for prior sampling</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">It extends model 5.1 by including an additional</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">predictor variable, M for marriage rate. </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// Number of obs</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] D;    <span class="co">// Divorce rate</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] A;    <span class="co">// Age at marriage</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] M;    <span class="co">// Marriage rate</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Prior only flag</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">  will be used to enable prior </span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">  simulations from the model. Set to 1 if </span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">  sampling from prior only. */</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; prior_only;</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;               <span class="co">// Intercept</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> ba;              <span class="co">// Slope for A</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> bm;              <span class="co">// Slope for M</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma;  <span class="co">// Sigma with lwr bound</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> mu;</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    mu[i] = a + ba * A[i] + bm * M[i];</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  a ~ normal(<span class="dv">0</span>, <span class="fl">0.2</span>);</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  ba ~ normal(<span class="dv">0</span>, <span class="fl">0.5</span>);</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  bm ~ normal(<span class="dv">0</span>, <span class="fl">0.5</span>);</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  sigma ~ exponential(<span class="dv">1</span>);</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (prior_only == <span class="dv">0</span>) {</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    D ~ normal(mu, sigma);</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> y_rep;</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  y_rep = normal_rng(mu, sigma);</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>In Model 5.3, an additional predictor variable is introduced. The data is already in the data list.</p>
 <p>In the code block below I’m compiling the model, fitting it using the data and plotting predictions.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-3.stan"</span>, </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-3.exe"</span>)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.3</span> <span class="ot">&lt;-</span> m5<span class="fl">.3</span><span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-3.stan"</span>, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-3.exe"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.3</span> <span class="ot">&lt;-</span> m5<span class="fl">.3</span><span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 1 chain...
 
@@ -689,45 +678,45 @@ Chain 1 Iteration: 2000 / 3000 [ 66%]  (Sampling)
 Chain 1 Iteration: 3000 / 3000 [100%]  (Sampling) 
 Chain 1 finished in 0.3 seconds.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.3</span> <span class="ot">&lt;-</span> fit5<span class="fl">.3</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.3</span> <span class="ot">&lt;-</span> fit5<span class="fl">.3</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>100 vector or matrix parameters hidden. Use depth=2 to show them.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              mean         sd       5.5%      94.5%      rhat ess_bulk
-a     -0.002976899 0.09871849 -0.1589126  0.1574820 0.9998328 1834.717
-ba    -0.613125459 0.15961699 -0.8779592 -0.3648359 1.0000590 1370.230
-bm    -0.066934784 0.15657111 -0.3268080  0.1811760 0.9998966 1370.132
-sigma  0.826248611 0.08485109  0.6985438  0.9720192 1.0014529 1550.662</code></pre>
+<pre><code>             mean         sd       5.5%      94.5%      rhat ess_bulk
+a     -0.00161789 0.10020078 -0.1687970  0.1526217 1.0002517 2081.844
+ba    -0.60759396 0.15396359 -0.8483205 -0.3693579 1.0004662 1258.419
+bm    -0.06158410 0.15746664 -0.3100090  0.1899421 1.0004542 1287.190
+sigma  0.82406752 0.08666529  0.6991766  0.9716729 0.9998269 1798.316</code></pre>
 </div>
 </div>
 <p>Recreating the comparison between the models is done below</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.3</span> <span class="sc">|&gt;</span> </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bm, ba) <span class="sc">|&gt;</span> </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"param"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"m5.3"</span>), </span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.2</span> <span class="sc">|&gt;</span> </span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(bm) <span class="sc">|&gt;</span> </span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"bm"</span>, </span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.2"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> bm, model), </span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ba) <span class="sc">|&gt;</span> </span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"ba"</span>, </span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.1"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> ba, model) ) <span class="sc">|&gt;</span>  </span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, <span class="at">color =</span> model)) <span class="sc">+</span> </span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> param)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.3</span> <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bm, ba) <span class="sc">|&gt;</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"param"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"m5.3"</span>), </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.2</span> <span class="sc">|&gt;</span> </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(bm) <span class="sc">|&gt;</span> </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"bm"</span>, </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.2"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> bm, model), </span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ba) <span class="sc">|&gt;</span> </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"ba"</span>, </span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.1"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> ba, model) ) <span class="sc">|&gt;</span>  </span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, <span class="at">color =</span> model)) <span class="sc">+</span> </span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> param)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Dropping 'draws_df' class as required metadata was removed.
 Warning: Dropping 'draws_df' class as required metadata was removed.
@@ -1212,377 +1201,377 @@ Warning: Dropping 'draws_df' class as required metadata was removed.</code></pre
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Chapter 5: The Many variables &amp; The Spurious Waffles"</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="an">reference-location:</span><span class="co"> margin</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="an">citation-location:</span><span class="co"> margin</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading packages</span></span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model 5.1</span></span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>The first model of the chapter does not contain any surprises. However, a method for drawing samples from the prior is presented in the form of the function <span class="in">`extract.prior`</span>. We can include similar behaviour into our Stan models by making sampling from the likelihood conditional on a flag. </span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>The model is defined as:</span>
-<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>m5_1_code <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">'models/m5-1.stan'</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
-<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
-<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) <span class="sc">\\</span></span>
-<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>\mu &amp;= \alpha + \beta_A A <span class="sc">\\</span> </span>
-<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>\alpha &amp;\sim \operatorname{Normal}(0, 0.2) <span class="sc">\\</span></span>
-<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>\beta_A &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
-<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>\sigma &amp;\sim \operatorname{Exponential}(1)</span>
-<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
-<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
-<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
-<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: "m5.1"</span></span>
-<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a><span class="in">#| code: !expr m5_1_code</span></span>
-<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-74"><a href="#cb34-74" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-75"><a href="#cb34-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-76"><a href="#cb34-76" aria-hidden="true" tabindex="-1"></a>To run the model we will have to prepare the data and include the flag variable. </span>
-<span id="cb34-77"><a href="#cb34-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-80"><a href="#cb34-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-81"><a href="#cb34-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading data</span></span>
-<span id="cb34-82"><a href="#cb34-82" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(WaffleDivorce) </span>
-<span id="cb34-83"><a href="#cb34-83" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> WaffleDivorce  </span>
-<span id="cb34-84"><a href="#cb34-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-85"><a href="#cb34-85" aria-hidden="true" tabindex="-1"></a>dl <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb34-86"><a href="#cb34-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="fu">length</span>(dat<span class="sc">$</span>Divorce),</span>
-<span id="cb34-87"><a href="#cb34-87" aria-hidden="true" tabindex="-1"></a>  <span class="at">D =</span> <span class="fu">standardize</span>(dat<span class="sc">$</span>Divorce), </span>
-<span id="cb34-88"><a href="#cb34-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fu">standardize</span>(dat<span class="sc">$</span>Marriage), </span>
-<span id="cb34-89"><a href="#cb34-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">standardize</span>(dat<span class="sc">$</span>MedianAgeMarriage),</span>
-<span id="cb34-90"><a href="#cb34-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior_only =</span> <span class="dv">1</span></span>
-<span id="cb34-91"><a href="#cb34-91" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-92"><a href="#cb34-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-93"><a href="#cb34-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-94"><a href="#cb34-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-95"><a href="#cb34-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-96"><a href="#cb34-96" aria-hidden="true" tabindex="-1"></a>Next we are compiling the model. </span>
-<span id="cb34-97"><a href="#cb34-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-98"><a href="#cb34-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-101"><a href="#cb34-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-102"><a href="#cb34-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb34-103"><a href="#cb34-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-104"><a href="#cb34-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
-<span id="cb34-105"><a href="#cb34-105" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-1.stan"</span>, </span>
-<span id="cb34-106"><a href="#cb34-106" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-1.exe"</span>)</span>
-<span id="cb34-107"><a href="#cb34-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-108"><a href="#cb34-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-109"><a href="#cb34-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-110"><a href="#cb34-110" aria-hidden="true" tabindex="-1"></a>The model is now ready to run using only the prior. </span>
-<span id="cb34-111"><a href="#cb34-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-114"><a href="#cb34-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-115"><a href="#cb34-115" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.1</span> <span class="ot">&lt;-</span> m5<span class="fl">.1</span><span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb34-116"><a href="#cb34-116" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
-<span id="cb34-117"><a href="#cb34-117" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
-<span id="cb34-118"><a href="#cb34-118" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
-<span id="cb34-119"><a href="#cb34-119" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
-<span id="cb34-120"><a href="#cb34-120" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
-<span id="cb34-121"><a href="#cb34-121" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-122"><a href="#cb34-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-123"><a href="#cb34-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-124"><a href="#cb34-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-125"><a href="#cb34-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-126"><a href="#cb34-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-127"><a href="#cb34-127" aria-hidden="true" tabindex="-1"></a>The prior model samples fine. Using the draws we can construct a prior predictive check similar to Figure 5.3 <span class="co">[</span><span class="ot">@rethink2020, pp. 127</span><span class="co">]</span>.</span>
-<span id="cb34-128"><a href="#cb34-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-129"><a href="#cb34-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-132"><a href="#cb34-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-133"><a href="#cb34-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Recreating figure 5.3 from a prior-only sample."</span></span>
-<span id="cb34-134"><a href="#cb34-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-135"><a href="#cb34-135" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="ot">&lt;-</span> fit5<span class="fl">.1</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
-<span id="cb34-136"><a href="#cb34-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-137"><a href="#cb34-137" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
-<span id="cb34-138"><a href="#cb34-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a, ba, .iteration) <span class="sc">|&gt;</span></span>
-<span id="cb34-139"><a href="#cb34-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">50</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb34-140"><a href="#cb34-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_grid</span>(<span class="at">A =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="dv">2</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb34-141"><a href="#cb34-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-142"><a href="#cb34-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(A, a <span class="sc">+</span> ba <span class="sc">*</span> A, <span class="at">group =</span> .iteration)) <span class="sc">+</span> </span>
-<span id="cb34-143"><a href="#cb34-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb34-144"><a href="#cb34-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Median age marriage (std)"</span>, </span>
-<span id="cb34-145"><a href="#cb34-145" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Divorce rate (std)"</span>)</span>
-<span id="cb34-146"><a href="#cb34-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-147"><a href="#cb34-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-148"><a href="#cb34-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-149"><a href="#cb34-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-150"><a href="#cb34-150" aria-hidden="true" tabindex="-1"></a>The benefits of using the same model program for prior and posterior analysis maybe becomes more obvious when the model gets complex and there is no easy way to do prior simulations. Additionally, the <span class="in">`prior_only`</span> flag saves us from having to re-compile a new model that contains the likelihood.  </span>
-<span id="cb34-151"><a href="#cb34-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-152"><a href="#cb34-152" aria-hidden="true" tabindex="-1"></a>We will do posterior predictions next. All we need to change is the flag variable.</span>
-<span id="cb34-153"><a href="#cb34-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-154"><a href="#cb34-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-157"><a href="#cb34-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-158"><a href="#cb34-158" aria-hidden="true" tabindex="-1"></a>dl<span class="sc">$</span>prior_only <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb34-159"><a href="#cb34-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-160"><a href="#cb34-160" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.1</span> <span class="ot">&lt;-</span> m5<span class="fl">.1</span><span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb34-161"><a href="#cb34-161" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
-<span id="cb34-162"><a href="#cb34-162" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
-<span id="cb34-163"><a href="#cb34-163" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
-<span id="cb34-164"><a href="#cb34-164" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
-<span id="cb34-165"><a href="#cb34-165" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
-<span id="cb34-166"><a href="#cb34-166" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-167"><a href="#cb34-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-168"><a href="#cb34-168" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="ot">&lt;-</span> fit5<span class="fl">.1</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
-<span id="cb34-169"><a href="#cb34-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-170"><a href="#cb34-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-171"><a href="#cb34-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-172"><a href="#cb34-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-173"><a href="#cb34-173" aria-hidden="true" tabindex="-1"></a>Plotting the posterior and data provides a check for the model.</span>
-<span id="cb34-174"><a href="#cb34-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-177"><a href="#cb34-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-178"><a href="#cb34-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Recreating one panel from Figure 5.2." </span></span>
-<span id="cb34-179"><a href="#cb34-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-180"><a href="#cb34-180" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
-<span id="cb34-181"><a href="#cb34-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a, ba, .iteration) <span class="sc">|&gt;</span> </span>
-<span id="cb34-182"><a href="#cb34-182" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-183"><a href="#cb34-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_grid</span>(<span class="at">A =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb34-184"><a href="#cb34-184" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-185"><a href="#cb34-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_pred =</span> a <span class="sc">+</span> ba <span class="sc">*</span> A) <span class="sc">|&gt;</span> </span>
-<span id="cb34-186"><a href="#cb34-186" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-187"><a href="#cb34-187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">.by =</span> A, </span>
-<span id="cb34-188"><a href="#cb34-188" aria-hidden="true" tabindex="-1"></a>            <span class="at">m =</span> <span class="fu">mean</span>(y_pred), </span>
-<span id="cb34-189"><a href="#cb34-189" aria-hidden="true" tabindex="-1"></a>            <span class="at">lwr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.055</span>), </span>
-<span id="cb34-190"><a href="#cb34-190" aria-hidden="true" tabindex="-1"></a>            <span class="at">upr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.945</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb34-191"><a href="#cb34-191" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-192"><a href="#cb34-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-193"><a href="#cb34-193" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-194"><a href="#cb34-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(A, m)) <span class="sc">+</span> </span>
-<span id="cb34-195"><a href="#cb34-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, </span>
-<span id="cb34-196"><a href="#cb34-196" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> upr ), </span>
-<span id="cb34-197"><a href="#cb34-197" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb34-198"><a href="#cb34-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()  <span class="sc">+</span> </span>
-<span id="cb34-199"><a href="#cb34-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">A =</span> dl<span class="sc">$</span>A, </span>
-<span id="cb34-200"><a href="#cb34-200" aria-hidden="true" tabindex="-1"></a>                               <span class="at">D =</span> dl<span class="sc">$</span>D), </span>
-<span id="cb34-201"><a href="#cb34-201" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(A, D)) <span class="sc">+</span> </span>
-<span id="cb34-202"><a href="#cb34-202" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb34-203"><a href="#cb34-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb34-204"><a href="#cb34-204" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">round</span>(x <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>MedianAgeMarriage) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>MedianAgeMarriage),<span class="dv">1</span>),</span>
-<span id="cb34-205"><a href="#cb34-205" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Median age at marriage"</span>) <span class="sc">+</span></span>
-<span id="cb34-206"><a href="#cb34-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb34-207"><a href="#cb34-207" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(y) <span class="fu">round</span>(y <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>Divorce) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>Divorce),<span class="dv">1</span>),</span>
-<span id="cb34-208"><a href="#cb34-208" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Divorce rate"</span>) <span class="sc">+</span> </span>
-<span id="cb34-209"><a href="#cb34-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb34-210"><a href="#cb34-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-211"><a href="#cb34-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-212"><a href="#cb34-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-213"><a href="#cb34-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-214"><a href="#cb34-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-215"><a href="#cb34-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model 5.2</span></span>
-<span id="cb34-216"><a href="#cb34-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-217"><a href="#cb34-217" aria-hidden="true" tabindex="-1"></a>Model 5.2 does not introduce anything new. We fit it to able to compare posterior estimates later on. </span>
-<span id="cb34-218"><a href="#cb34-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-219"><a href="#cb34-219" aria-hidden="true" tabindex="-1"></a>The model is defined as:</span>
-<span id="cb34-220"><a href="#cb34-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-223"><a href="#cb34-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-224"><a href="#cb34-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb34-225"><a href="#cb34-225" aria-hidden="true" tabindex="-1"></a>m5_2_code <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">'models/m5-2.stan'</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb34-226"><a href="#cb34-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-227"><a href="#cb34-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-228"><a href="#cb34-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-229"><a href="#cb34-229" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
-<span id="cb34-230"><a href="#cb34-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-231"><a href="#cb34-231" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
-<span id="cb34-232"><a href="#cb34-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-233"><a href="#cb34-233" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb34-234"><a href="#cb34-234" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb34-235"><a href="#cb34-235" aria-hidden="true" tabindex="-1"></a>D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) <span class="sc">\\</span></span>
-<span id="cb34-236"><a href="#cb34-236" aria-hidden="true" tabindex="-1"></a>\mu &amp;= \alpha + \beta_M M <span class="sc">\\</span> </span>
-<span id="cb34-237"><a href="#cb34-237" aria-hidden="true" tabindex="-1"></a>\alpha &amp;\sim \operatorname{Normal}(0, 0.2) <span class="sc">\\</span></span>
-<span id="cb34-238"><a href="#cb34-238" aria-hidden="true" tabindex="-1"></a>\beta_M &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
-<span id="cb34-239"><a href="#cb34-239" aria-hidden="true" tabindex="-1"></a>\sigma &amp;\sim \operatorname{Exponential}(1)</span>
-<span id="cb34-240"><a href="#cb34-240" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb34-241"><a href="#cb34-241" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb34-242"><a href="#cb34-242" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-243"><a href="#cb34-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-244"><a href="#cb34-244" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
-<span id="cb34-245"><a href="#cb34-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-246"><a href="#cb34-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-247"><a href="#cb34-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-250"><a href="#cb34-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
-<span id="cb34-251"><a href="#cb34-251" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
-<span id="cb34-252"><a href="#cb34-252" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: "m5.2"</span></span>
-<span id="cb34-253"><a href="#cb34-253" aria-hidden="true" tabindex="-1"></a><span class="in">#| code: !expr m5_2_code</span></span>
-<span id="cb34-254"><a href="#cb34-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-255"><a href="#cb34-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-256"><a href="#cb34-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-257"><a href="#cb34-257" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-258"><a href="#cb34-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-259"><a href="#cb34-259" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-260"><a href="#cb34-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-261"><a href="#cb34-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-262"><a href="#cb34-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-263"><a href="#cb34-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-266"><a href="#cb34-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-267"><a href="#cb34-267" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
-<span id="cb34-268"><a href="#cb34-268" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-2.stan"</span>, </span>
-<span id="cb34-269"><a href="#cb34-269" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-2.exe"</span>)</span>
-<span id="cb34-270"><a href="#cb34-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-271"><a href="#cb34-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-272"><a href="#cb34-272" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.2</span> <span class="ot">&lt;-</span> m5<span class="fl">.2</span><span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb34-273"><a href="#cb34-273" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
-<span id="cb34-274"><a href="#cb34-274" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
-<span id="cb34-275"><a href="#cb34-275" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
-<span id="cb34-276"><a href="#cb34-276" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
-<span id="cb34-277"><a href="#cb34-277" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
-<span id="cb34-278"><a href="#cb34-278" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-279"><a href="#cb34-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-280"><a href="#cb34-280" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.2</span> <span class="ot">&lt;-</span> fit5<span class="fl">.2</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
-<span id="cb34-281"><a href="#cb34-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-282"><a href="#cb34-282" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.2</span>)</span>
-<span id="cb34-283"><a href="#cb34-283" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-284"><a href="#cb34-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-285"><a href="#cb34-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-286"><a href="#cb34-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-287"><a href="#cb34-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-288"><a href="#cb34-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-289"><a href="#cb34-289" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model 5.3</span></span>
-<span id="cb34-290"><a href="#cb34-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-291"><a href="#cb34-291" aria-hidden="true" tabindex="-1"></a>The model is defined as:</span>
-<span id="cb34-292"><a href="#cb34-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-295"><a href="#cb34-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-296"><a href="#cb34-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb34-297"><a href="#cb34-297" aria-hidden="true" tabindex="-1"></a>m5_3_code <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">'models/m5-3.stan'</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb34-298"><a href="#cb34-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-299"><a href="#cb34-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-300"><a href="#cb34-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-301"><a href="#cb34-301" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
-<span id="cb34-302"><a href="#cb34-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-303"><a href="#cb34-303" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
-<span id="cb34-304"><a href="#cb34-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-305"><a href="#cb34-305" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb34-306"><a href="#cb34-306" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb34-307"><a href="#cb34-307" aria-hidden="true" tabindex="-1"></a>D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) <span class="sc">\\</span></span>
-<span id="cb34-308"><a href="#cb34-308" aria-hidden="true" tabindex="-1"></a>\mu &amp;= \alpha + \beta_M M + \beta_A A  <span class="sc">\\</span> </span>
-<span id="cb34-309"><a href="#cb34-309" aria-hidden="true" tabindex="-1"></a>\alpha &amp;\sim \operatorname{Normal}(0, 0.2) <span class="sc">\\</span></span>
-<span id="cb34-310"><a href="#cb34-310" aria-hidden="true" tabindex="-1"></a>\beta_M &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
-<span id="cb34-311"><a href="#cb34-311" aria-hidden="true" tabindex="-1"></a>\beta_A &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
-<span id="cb34-312"><a href="#cb34-312" aria-hidden="true" tabindex="-1"></a>\sigma &amp;\sim \operatorname{Exponential}(1)</span>
-<span id="cb34-313"><a href="#cb34-313" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb34-314"><a href="#cb34-314" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb34-315"><a href="#cb34-315" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-316"><a href="#cb34-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-317"><a href="#cb34-317" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
-<span id="cb34-318"><a href="#cb34-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-319"><a href="#cb34-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-320"><a href="#cb34-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-323"><a href="#cb34-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
-<span id="cb34-324"><a href="#cb34-324" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
-<span id="cb34-325"><a href="#cb34-325" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: "m5.3"</span></span>
-<span id="cb34-326"><a href="#cb34-326" aria-hidden="true" tabindex="-1"></a><span class="in">#| code: !expr m5_3_code</span></span>
-<span id="cb34-327"><a href="#cb34-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-328"><a href="#cb34-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-329"><a href="#cb34-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-330"><a href="#cb34-330" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-331"><a href="#cb34-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-332"><a href="#cb34-332" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb34-333"><a href="#cb34-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-334"><a href="#cb34-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-335"><a href="#cb34-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-336"><a href="#cb34-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-337"><a href="#cb34-337" aria-hidden="true" tabindex="-1"></a>In Model 5.3, an additional predictor variable is introduced. The data is already in the data list.</span>
-<span id="cb34-338"><a href="#cb34-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-339"><a href="#cb34-339" aria-hidden="true" tabindex="-1"></a>In the code block below I'm compiling the model, fitting it using the data and plotting predictions. </span>
-<span id="cb34-340"><a href="#cb34-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-341"><a href="#cb34-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-344"><a href="#cb34-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-345"><a href="#cb34-345" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb34-346"><a href="#cb34-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-347"><a href="#cb34-347" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
-<span id="cb34-348"><a href="#cb34-348" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-3.stan"</span>, </span>
-<span id="cb34-349"><a href="#cb34-349" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-3.exe"</span>)</span>
-<span id="cb34-350"><a href="#cb34-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-351"><a href="#cb34-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-352"><a href="#cb34-352" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.3</span> <span class="ot">&lt;-</span> m5<span class="fl">.3</span><span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb34-353"><a href="#cb34-353" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
-<span id="cb34-354"><a href="#cb34-354" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
-<span id="cb34-355"><a href="#cb34-355" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
-<span id="cb34-356"><a href="#cb34-356" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
-<span id="cb34-357"><a href="#cb34-357" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
-<span id="cb34-358"><a href="#cb34-358" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-359"><a href="#cb34-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-360"><a href="#cb34-360" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.3</span> <span class="ot">&lt;-</span> fit5<span class="fl">.3</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
-<span id="cb34-361"><a href="#cb34-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-362"><a href="#cb34-362" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.3</span>)</span>
-<span id="cb34-363"><a href="#cb34-363" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-364"><a href="#cb34-364" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-365"><a href="#cb34-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-366"><a href="#cb34-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-367"><a href="#cb34-367" aria-hidden="true" tabindex="-1"></a>Recreating the comparison between the models is done below</span>
-<span id="cb34-368"><a href="#cb34-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-371"><a href="#cb34-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb34-372"><a href="#cb34-372" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
-<span id="cb34-373"><a href="#cb34-373" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.3</span> <span class="sc">|&gt;</span> </span>
-<span id="cb34-374"><a href="#cb34-374" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bm, ba) <span class="sc">|&gt;</span> </span>
-<span id="cb34-375"><a href="#cb34-375" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), </span>
-<span id="cb34-376"><a href="#cb34-376" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
-<span id="cb34-377"><a href="#cb34-377" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"param"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb34-378"><a href="#cb34-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"m5.3"</span>), </span>
-<span id="cb34-379"><a href="#cb34-379" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-380"><a href="#cb34-380" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.2</span> <span class="sc">|&gt;</span> </span>
-<span id="cb34-381"><a href="#cb34-381" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(bm) <span class="sc">|&gt;</span> </span>
-<span id="cb34-382"><a href="#cb34-382" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"bm"</span>, </span>
-<span id="cb34-383"><a href="#cb34-383" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.2"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb34-384"><a href="#cb34-384" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> bm, model), </span>
-<span id="cb34-385"><a href="#cb34-385" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-386"><a href="#cb34-386" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
-<span id="cb34-387"><a href="#cb34-387" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ba) <span class="sc">|&gt;</span> </span>
-<span id="cb34-388"><a href="#cb34-388" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"ba"</span>, </span>
-<span id="cb34-389"><a href="#cb34-389" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.1"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb34-390"><a href="#cb34-390" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> ba, model) ) <span class="sc">|&gt;</span>  </span>
-<span id="cb34-391"><a href="#cb34-391" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-392"><a href="#cb34-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, <span class="at">color =</span> model)) <span class="sc">+</span> </span>
-<span id="cb34-393"><a href="#cb34-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
-<span id="cb34-394"><a href="#cb34-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> param)</span>
-<span id="cb34-395"><a href="#cb34-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-396"><a href="#cb34-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb34-397"><a href="#cb34-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-398"><a href="#cb34-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-399"><a href="#cb34-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-400"><a href="#cb34-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-401"><a href="#cb34-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-402"><a href="#cb34-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-403"><a href="#cb34-403" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Chapter 5: The Many variables &amp; The Spurious Waffles"</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="an">reference-location:</span><span class="co"> margin</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="an">citation-location:</span><span class="co"> margin</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading packages</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model 5.1</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>The first model of the chapter does not contain any surprises. However, a method for drawing samples from the prior is presented in the form of the function <span class="in">`extract.prior`</span>. We can include similar behaviour into our Stan models by making sampling from the likelihood conditional on a flag. </span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>The model is defined as:</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>m5_1_code <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">'models/m5-1.stan'</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) <span class="sc">\\</span></span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>\mu &amp;= \alpha + \beta_A A <span class="sc">\\</span> </span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a>\alpha &amp;\sim \operatorname{Normal}(0, 0.2) <span class="sc">\\</span></span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a>\beta_A &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a>\sigma &amp;\sim \operatorname{Exponential}(1)</span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: "m5.1"</span></span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a><span class="in">#| code: !expr m5_1_code</span></span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a>To run the model we will have to prepare the data and include the flag variable. </span>
+<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading data</span></span>
+<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(WaffleDivorce) </span>
+<span id="cb28-83"><a href="#cb28-83" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> WaffleDivorce  </span>
+<span id="cb28-84"><a href="#cb28-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a>dl <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="fu">length</span>(dat<span class="sc">$</span>Divorce),</span>
+<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a>  <span class="at">D =</span> <span class="fu">standardize</span>(dat<span class="sc">$</span>Divorce), </span>
+<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fu">standardize</span>(dat<span class="sc">$</span>Marriage), </span>
+<span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">standardize</span>(dat<span class="sc">$</span>MedianAgeMarriage),</span>
+<span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior_only =</span> <span class="dv">1</span></span>
+<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-95"><a href="#cb28-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-96"><a href="#cb28-96" aria-hidden="true" tabindex="-1"></a>Next we are compiling the model. </span>
+<span id="cb28-97"><a href="#cb28-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-98"><a href="#cb28-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-101"><a href="#cb28-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-102"><a href="#cb28-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb28-103"><a href="#cb28-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-104"><a href="#cb28-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
+<span id="cb28-105"><a href="#cb28-105" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-1.stan"</span>, </span>
+<span id="cb28-106"><a href="#cb28-106" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-1.exe"</span>)</span>
+<span id="cb28-107"><a href="#cb28-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-108"><a href="#cb28-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-109"><a href="#cb28-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-110"><a href="#cb28-110" aria-hidden="true" tabindex="-1"></a>The model is now ready to run using only the prior. </span>
+<span id="cb28-111"><a href="#cb28-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-114"><a href="#cb28-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-115"><a href="#cb28-115" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.1</span> <span class="ot">&lt;-</span> m5<span class="fl">.1</span><span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb28-116"><a href="#cb28-116" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
+<span id="cb28-117"><a href="#cb28-117" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
+<span id="cb28-118"><a href="#cb28-118" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
+<span id="cb28-119"><a href="#cb28-119" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
+<span id="cb28-120"><a href="#cb28-120" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
+<span id="cb28-121"><a href="#cb28-121" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-122"><a href="#cb28-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-123"><a href="#cb28-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-124"><a href="#cb28-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-125"><a href="#cb28-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-126"><a href="#cb28-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-127"><a href="#cb28-127" aria-hidden="true" tabindex="-1"></a>The prior model samples fine. Using the draws we can construct a prior predictive check similar to Figure 5.3 <span class="co">[</span><span class="ot">@rethink2020, pp. 127</span><span class="co">]</span>.</span>
+<span id="cb28-128"><a href="#cb28-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-129"><a href="#cb28-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-132"><a href="#cb28-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-133"><a href="#cb28-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Recreating figure 5.3 from a prior-only sample."</span></span>
+<span id="cb28-134"><a href="#cb28-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-135"><a href="#cb28-135" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="ot">&lt;-</span> fit5<span class="fl">.1</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
+<span id="cb28-136"><a href="#cb28-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-137"><a href="#cb28-137" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
+<span id="cb28-138"><a href="#cb28-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a, ba, .iteration) <span class="sc">|&gt;</span></span>
+<span id="cb28-139"><a href="#cb28-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">50</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-140"><a href="#cb28-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_grid</span>(<span class="at">A =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="dv">2</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb28-141"><a href="#cb28-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-142"><a href="#cb28-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(A, a <span class="sc">+</span> ba <span class="sc">*</span> A, <span class="at">group =</span> .iteration)) <span class="sc">+</span> </span>
+<span id="cb28-143"><a href="#cb28-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb28-144"><a href="#cb28-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Median age marriage (std)"</span>, </span>
+<span id="cb28-145"><a href="#cb28-145" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Divorce rate (std)"</span>)</span>
+<span id="cb28-146"><a href="#cb28-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-147"><a href="#cb28-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-148"><a href="#cb28-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-149"><a href="#cb28-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-150"><a href="#cb28-150" aria-hidden="true" tabindex="-1"></a>The benefits of using the same model program for prior and posterior analysis maybe becomes more obvious when the model gets complex and there is no easy way to do prior simulations. Additionally, the <span class="in">`prior_only`</span> flag saves us from having to re-compile a new model that contains the likelihood.  </span>
+<span id="cb28-151"><a href="#cb28-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-152"><a href="#cb28-152" aria-hidden="true" tabindex="-1"></a>We will do posterior predictions next. All we need to change is the flag variable.</span>
+<span id="cb28-153"><a href="#cb28-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-154"><a href="#cb28-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-157"><a href="#cb28-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-158"><a href="#cb28-158" aria-hidden="true" tabindex="-1"></a>dl<span class="sc">$</span>prior_only <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb28-159"><a href="#cb28-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-160"><a href="#cb28-160" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.1</span> <span class="ot">&lt;-</span> m5<span class="fl">.1</span><span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb28-161"><a href="#cb28-161" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
+<span id="cb28-162"><a href="#cb28-162" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
+<span id="cb28-163"><a href="#cb28-163" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
+<span id="cb28-164"><a href="#cb28-164" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
+<span id="cb28-165"><a href="#cb28-165" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
+<span id="cb28-166"><a href="#cb28-166" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-167"><a href="#cb28-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-168"><a href="#cb28-168" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="ot">&lt;-</span> fit5<span class="fl">.1</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
+<span id="cb28-169"><a href="#cb28-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-170"><a href="#cb28-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-171"><a href="#cb28-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-172"><a href="#cb28-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-173"><a href="#cb28-173" aria-hidden="true" tabindex="-1"></a>Plotting the posterior and data provides a check for the model.</span>
+<span id="cb28-174"><a href="#cb28-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-177"><a href="#cb28-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-178"><a href="#cb28-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Recreating one panel from Figure 5.2." </span></span>
+<span id="cb28-179"><a href="#cb28-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-180"><a href="#cb28-180" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
+<span id="cb28-181"><a href="#cb28-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a, ba, .iteration) <span class="sc">|&gt;</span> </span>
+<span id="cb28-182"><a href="#cb28-182" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb28-183"><a href="#cb28-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_grid</span>(<span class="at">A =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb28-184"><a href="#cb28-184" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-185"><a href="#cb28-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_pred =</span> a <span class="sc">+</span> ba <span class="sc">*</span> A) <span class="sc">|&gt;</span> </span>
+<span id="cb28-186"><a href="#cb28-186" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-187"><a href="#cb28-187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">.by =</span> A, </span>
+<span id="cb28-188"><a href="#cb28-188" aria-hidden="true" tabindex="-1"></a>            <span class="at">m =</span> <span class="fu">mean</span>(y_pred), </span>
+<span id="cb28-189"><a href="#cb28-189" aria-hidden="true" tabindex="-1"></a>            <span class="at">lwr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.055</span>), </span>
+<span id="cb28-190"><a href="#cb28-190" aria-hidden="true" tabindex="-1"></a>            <span class="at">upr =</span> <span class="fu">quantile</span>(y_pred, <span class="fl">0.945</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb28-191"><a href="#cb28-191" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-192"><a href="#cb28-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-193"><a href="#cb28-193" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-194"><a href="#cb28-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(A, m)) <span class="sc">+</span> </span>
+<span id="cb28-195"><a href="#cb28-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, </span>
+<span id="cb28-196"><a href="#cb28-196" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> upr ), </span>
+<span id="cb28-197"><a href="#cb28-197" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb28-198"><a href="#cb28-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()  <span class="sc">+</span> </span>
+<span id="cb28-199"><a href="#cb28-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">A =</span> dl<span class="sc">$</span>A, </span>
+<span id="cb28-200"><a href="#cb28-200" aria-hidden="true" tabindex="-1"></a>                               <span class="at">D =</span> dl<span class="sc">$</span>D), </span>
+<span id="cb28-201"><a href="#cb28-201" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(A, D)) <span class="sc">+</span> </span>
+<span id="cb28-202"><a href="#cb28-202" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb28-203"><a href="#cb28-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb28-204"><a href="#cb28-204" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">round</span>(x <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>MedianAgeMarriage) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>MedianAgeMarriage),<span class="dv">1</span>),</span>
+<span id="cb28-205"><a href="#cb28-205" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Median age at marriage"</span>) <span class="sc">+</span></span>
+<span id="cb28-206"><a href="#cb28-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb28-207"><a href="#cb28-207" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(y) <span class="fu">round</span>(y <span class="sc">*</span> <span class="fu">sd</span>(dat<span class="sc">$</span>Divorce) <span class="sc">+</span> <span class="fu">mean</span>(dat<span class="sc">$</span>Divorce),<span class="dv">1</span>),</span>
+<span id="cb28-208"><a href="#cb28-208" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Divorce rate"</span>) <span class="sc">+</span> </span>
+<span id="cb28-209"><a href="#cb28-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb28-210"><a href="#cb28-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-211"><a href="#cb28-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-212"><a href="#cb28-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-213"><a href="#cb28-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-214"><a href="#cb28-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-215"><a href="#cb28-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model 5.2</span></span>
+<span id="cb28-216"><a href="#cb28-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-217"><a href="#cb28-217" aria-hidden="true" tabindex="-1"></a>Model 5.2 does not introduce anything new. We fit it to able to compare posterior estimates later on. </span>
+<span id="cb28-218"><a href="#cb28-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-219"><a href="#cb28-219" aria-hidden="true" tabindex="-1"></a>The model is defined as:</span>
+<span id="cb28-220"><a href="#cb28-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-223"><a href="#cb28-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-224"><a href="#cb28-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-225"><a href="#cb28-225" aria-hidden="true" tabindex="-1"></a>m5_2_code <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">'models/m5-2.stan'</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb28-226"><a href="#cb28-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-227"><a href="#cb28-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-228"><a href="#cb28-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-229"><a href="#cb28-229" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb28-230"><a href="#cb28-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-231"><a href="#cb28-231" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb28-232"><a href="#cb28-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-233"><a href="#cb28-233" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-234"><a href="#cb28-234" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb28-235"><a href="#cb28-235" aria-hidden="true" tabindex="-1"></a>D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) <span class="sc">\\</span></span>
+<span id="cb28-236"><a href="#cb28-236" aria-hidden="true" tabindex="-1"></a>\mu &amp;= \alpha + \beta_M M <span class="sc">\\</span> </span>
+<span id="cb28-237"><a href="#cb28-237" aria-hidden="true" tabindex="-1"></a>\alpha &amp;\sim \operatorname{Normal}(0, 0.2) <span class="sc">\\</span></span>
+<span id="cb28-238"><a href="#cb28-238" aria-hidden="true" tabindex="-1"></a>\beta_M &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
+<span id="cb28-239"><a href="#cb28-239" aria-hidden="true" tabindex="-1"></a>\sigma &amp;\sim \operatorname{Exponential}(1)</span>
+<span id="cb28-240"><a href="#cb28-240" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb28-241"><a href="#cb28-241" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-242"><a href="#cb28-242" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-243"><a href="#cb28-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-244"><a href="#cb28-244" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
+<span id="cb28-245"><a href="#cb28-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-246"><a href="#cb28-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-247"><a href="#cb28-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-250"><a href="#cb28-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
+<span id="cb28-251"><a href="#cb28-251" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
+<span id="cb28-252"><a href="#cb28-252" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: "m5.2"</span></span>
+<span id="cb28-253"><a href="#cb28-253" aria-hidden="true" tabindex="-1"></a><span class="in">#| code: !expr m5_2_code</span></span>
+<span id="cb28-254"><a href="#cb28-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-255"><a href="#cb28-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-256"><a href="#cb28-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-257"><a href="#cb28-257" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-258"><a href="#cb28-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-259"><a href="#cb28-259" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-260"><a href="#cb28-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-261"><a href="#cb28-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-262"><a href="#cb28-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-263"><a href="#cb28-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-266"><a href="#cb28-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-267"><a href="#cb28-267" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
+<span id="cb28-268"><a href="#cb28-268" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-2.stan"</span>, </span>
+<span id="cb28-269"><a href="#cb28-269" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-2.exe"</span>)</span>
+<span id="cb28-270"><a href="#cb28-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-271"><a href="#cb28-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-272"><a href="#cb28-272" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.2</span> <span class="ot">&lt;-</span> m5<span class="fl">.2</span><span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb28-273"><a href="#cb28-273" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
+<span id="cb28-274"><a href="#cb28-274" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
+<span id="cb28-275"><a href="#cb28-275" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
+<span id="cb28-276"><a href="#cb28-276" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
+<span id="cb28-277"><a href="#cb28-277" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
+<span id="cb28-278"><a href="#cb28-278" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-279"><a href="#cb28-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-280"><a href="#cb28-280" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.2</span> <span class="ot">&lt;-</span> fit5<span class="fl">.2</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
+<span id="cb28-281"><a href="#cb28-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-282"><a href="#cb28-282" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.2</span>)</span>
+<span id="cb28-283"><a href="#cb28-283" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-284"><a href="#cb28-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-285"><a href="#cb28-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-286"><a href="#cb28-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-287"><a href="#cb28-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-288"><a href="#cb28-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-289"><a href="#cb28-289" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model 5.3</span></span>
+<span id="cb28-290"><a href="#cb28-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-291"><a href="#cb28-291" aria-hidden="true" tabindex="-1"></a>The model is defined as:</span>
+<span id="cb28-292"><a href="#cb28-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-295"><a href="#cb28-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-296"><a href="#cb28-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-297"><a href="#cb28-297" aria-hidden="true" tabindex="-1"></a>m5_3_code <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">readLines</span>(<span class="st">'models/m5-3.stan'</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb28-298"><a href="#cb28-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-299"><a href="#cb28-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-300"><a href="#cb28-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-301"><a href="#cb28-301" aria-hidden="true" tabindex="-1"></a>::: {.columns}</span>
+<span id="cb28-302"><a href="#cb28-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-303"><a href="#cb28-303" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb28-304"><a href="#cb28-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-305"><a href="#cb28-305" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-306"><a href="#cb28-306" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb28-307"><a href="#cb28-307" aria-hidden="true" tabindex="-1"></a>D_i &amp;\sim \operatorname{Normal}(\mu_i, \sigma) <span class="sc">\\</span></span>
+<span id="cb28-308"><a href="#cb28-308" aria-hidden="true" tabindex="-1"></a>\mu &amp;= \alpha + \beta_M M + \beta_A A  <span class="sc">\\</span> </span>
+<span id="cb28-309"><a href="#cb28-309" aria-hidden="true" tabindex="-1"></a>\alpha &amp;\sim \operatorname{Normal}(0, 0.2) <span class="sc">\\</span></span>
+<span id="cb28-310"><a href="#cb28-310" aria-hidden="true" tabindex="-1"></a>\beta_M &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
+<span id="cb28-311"><a href="#cb28-311" aria-hidden="true" tabindex="-1"></a>\beta_A &amp;\sim \operatorname{Normal}(0, 0.5) <span class="sc">\\</span></span>
+<span id="cb28-312"><a href="#cb28-312" aria-hidden="true" tabindex="-1"></a>\sigma &amp;\sim \operatorname{Exponential}(1)</span>
+<span id="cb28-313"><a href="#cb28-313" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb28-314"><a href="#cb28-314" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb28-315"><a href="#cb28-315" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-316"><a href="#cb28-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-317"><a href="#cb28-317" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
+<span id="cb28-318"><a href="#cb28-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-319"><a href="#cb28-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-320"><a href="#cb28-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-323"><a href="#cb28-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{stan}</span></span>
+<span id="cb28-324"><a href="#cb28-324" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false</span></span>
+<span id="cb28-325"><a href="#cb28-325" aria-hidden="true" tabindex="-1"></a><span class="in">#| output.var: "m5.3"</span></span>
+<span id="cb28-326"><a href="#cb28-326" aria-hidden="true" tabindex="-1"></a><span class="in">#| code: !expr m5_3_code</span></span>
+<span id="cb28-327"><a href="#cb28-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-328"><a href="#cb28-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-329"><a href="#cb28-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-330"><a href="#cb28-330" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-331"><a href="#cb28-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-332"><a href="#cb28-332" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb28-333"><a href="#cb28-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-334"><a href="#cb28-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-335"><a href="#cb28-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-336"><a href="#cb28-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-337"><a href="#cb28-337" aria-hidden="true" tabindex="-1"></a>In Model 5.3, an additional predictor variable is introduced. The data is already in the data list.</span>
+<span id="cb28-338"><a href="#cb28-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-339"><a href="#cb28-339" aria-hidden="true" tabindex="-1"></a>In the code block below I'm compiling the model, fitting it using the data and plotting predictions. </span>
+<span id="cb28-340"><a href="#cb28-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-341"><a href="#cb28-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-344"><a href="#cb28-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-345"><a href="#cb28-345" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb28-346"><a href="#cb28-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-347"><a href="#cb28-347" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiling the model</span></span>
+<span id="cb28-348"><a href="#cb28-348" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="at">stan_file =</span> <span class="st">"models/m5-3.stan"</span>, </span>
+<span id="cb28-349"><a href="#cb28-349" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exe_file =</span> <span class="st">"models/m5-3.exe"</span>)</span>
+<span id="cb28-350"><a href="#cb28-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-351"><a href="#cb28-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-352"><a href="#cb28-352" aria-hidden="true" tabindex="-1"></a>fit5<span class="fl">.3</span> <span class="ot">&lt;-</span> m5<span class="fl">.3</span><span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb28-353"><a href="#cb28-353" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> dl,                 <span class="co"># The list of variables</span></span>
+<span id="cb28-354"><a href="#cb28-354" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_sampling =</span> <span class="dv">2000</span>,      <span class="co"># Number of iterations for sampling</span></span>
+<span id="cb28-355"><a href="#cb28-355" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter_warmup =</span> <span class="dv">1000</span>,        <span class="co"># Number of warm-up iterations</span></span>
+<span id="cb28-356"><a href="#cb28-356" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">1</span>,                <span class="co"># Number of Markov chains</span></span>
+<span id="cb28-357"><a href="#cb28-357" aria-hidden="true" tabindex="-1"></a>        <span class="at">refresh =</span> <span class="dv">1000</span>             <span class="co"># Number of iterations before each print</span></span>
+<span id="cb28-358"><a href="#cb28-358" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-359"><a href="#cb28-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-360"><a href="#cb28-360" aria-hidden="true" tabindex="-1"></a>draws5<span class="fl">.3</span> <span class="ot">&lt;-</span> fit5<span class="fl">.3</span><span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"df"</span>)</span>
+<span id="cb28-361"><a href="#cb28-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-362"><a href="#cb28-362" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(fit5<span class="fl">.3</span>)</span>
+<span id="cb28-363"><a href="#cb28-363" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-364"><a href="#cb28-364" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-365"><a href="#cb28-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-366"><a href="#cb28-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-367"><a href="#cb28-367" aria-hidden="true" tabindex="-1"></a>Recreating the comparison between the models is done below</span>
+<span id="cb28-368"><a href="#cb28-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-371"><a href="#cb28-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-372"><a href="#cb28-372" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb28-373"><a href="#cb28-373" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.3</span> <span class="sc">|&gt;</span> </span>
+<span id="cb28-374"><a href="#cb28-374" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bm, ba) <span class="sc">|&gt;</span> </span>
+<span id="cb28-375"><a href="#cb28-375" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), </span>
+<span id="cb28-376"><a href="#cb28-376" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>, </span>
+<span id="cb28-377"><a href="#cb28-377" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"param"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-378"><a href="#cb28-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="st">"m5.3"</span>), </span>
+<span id="cb28-379"><a href="#cb28-379" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-380"><a href="#cb28-380" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.2</span> <span class="sc">|&gt;</span> </span>
+<span id="cb28-381"><a href="#cb28-381" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(bm) <span class="sc">|&gt;</span> </span>
+<span id="cb28-382"><a href="#cb28-382" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"bm"</span>, </span>
+<span id="cb28-383"><a href="#cb28-383" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.2"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-384"><a href="#cb28-384" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> bm, model), </span>
+<span id="cb28-385"><a href="#cb28-385" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-386"><a href="#cb28-386" aria-hidden="true" tabindex="-1"></a>  draws5<span class="fl">.1</span> <span class="sc">|&gt;</span> </span>
+<span id="cb28-387"><a href="#cb28-387" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ba) <span class="sc">|&gt;</span> </span>
+<span id="cb28-388"><a href="#cb28-388" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">param =</span> <span class="st">"ba"</span>, </span>
+<span id="cb28-389"><a href="#cb28-389" aria-hidden="true" tabindex="-1"></a>           <span class="at">model =</span> <span class="st">"m5.1"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-390"><a href="#cb28-390" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(param, <span class="at">value =</span> ba, model) ) <span class="sc">|&gt;</span>  </span>
+<span id="cb28-391"><a href="#cb28-391" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-392"><a href="#cb28-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, <span class="at">color =</span> model)) <span class="sc">+</span> </span>
+<span id="cb28-393"><a href="#cb28-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
+<span id="cb28-394"><a href="#cb28-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> param)</span>
+<span id="cb28-395"><a href="#cb28-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-396"><a href="#cb28-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb28-397"><a href="#cb28-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-398"><a href="#cb28-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-399"><a href="#cb28-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-400"><a href="#cb28-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-401"><a href="#cb28-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-402"><a href="#cb28-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-403"><a href="#cb28-403" aria-hidden="true" tabindex="-1"></a></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
